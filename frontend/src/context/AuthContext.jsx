@@ -3,6 +3,18 @@ import { getUser, getToken, setUser, setToken, removeUser, removeToken } from '.
 
 const AuthContext = createContext(null);
 
+// 개발 환경 자동 관리자 계정
+const DEV_ADMIN_USER = {
+  id: 'dev-admin-001',
+  email: 'admin@ottshare.com',
+  nickname: '관리자',
+  role: 'admin',
+  profileImage: null,
+  createdAt: new Date().toISOString()
+};
+
+const DEV_ADMIN_TOKEN = 'dev-admin-token-for-local-development';
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -16,7 +28,21 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 초기 로드 시 저장된 사용자 정보 확인
+    // 개발 환경(localhost)인 경우 자동으로 관리자로 로그인
+    const isDevelopment = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1';
+    
+    if (isDevelopment) {
+      // 개발 환경: 자동 관리자 로그인
+      setToken(DEV_ADMIN_TOKEN);
+      setUser(DEV_ADMIN_USER);
+      setUserState(DEV_ADMIN_USER);
+      setLoading(false);
+      console.log('🔧 개발 환경: 자동 관리자 로그인 활성화');
+      return;
+    }
+    
+    // 프로덕션 환경: 기존 로직 유지
     const savedUser = getUser();
     const token = getToken();
     

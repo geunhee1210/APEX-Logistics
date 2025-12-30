@@ -1,40 +1,87 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  LayoutDashboard, FileText, Users, MessageSquare, Settings,
-  BarChart3, TrendingUp, Eye, DollarSign, UserPlus
+import {
+  LayoutDashboard,
+  DollarSign,
+  FileText,
+  HelpCircle,
+  Users,
+  Settings,
+  LogOut,
+  Menu,
+  X,
+  Bell,
+  ChevronRight,
+  Home
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { adminAPI } from '../services/api';
-import AdminPosts from '../components/admin/AdminPosts';
-import AdminPostWrite from '../components/admin/AdminPostWrite';
-import AdminUsers from '../components/admin/AdminUsers';
-import AdminComments from '../components/admin/AdminComments';
-import './AdminPage.css';
+
+// Admin Sub-pages
+import AdminOverview from './admin/AdminOverview';
+import PricingAdmin from './admin/PricingAdmin';
+import InsightAdmin from './admin/InsightAdmin';
+import SupportAdmin from './admin/SupportAdmin';
+import CustomersAdmin from './admin/CustomersAdmin';
+
+import './admin/AdminDashboard.css';
 
 const AdminPage = () => {
-  const { user } = useAuth();
+  const { user, loading, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [notifications, setNotifications] = useState(3);
 
   // 관리자 권한 체크
   useEffect(() => {
-    if (!user || user.role !== 'admin') {
+    if (!loading && (!user || user.role !== 'admin')) {
       navigate('/login');
     }
-  }, [user, navigate]);
+  }, [user, loading, navigate]);
 
-  if (!user || user.role !== 'admin') {
-    return null;
-  }
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   const menuItems = [
-    { path: '/admin', label: '대시보드', icon: <LayoutDashboard size={18} /> },
-    { path: '/admin/posts', label: '게시물 관리', icon: <FileText size={18} /> },
-    { path: '/admin/users', label: '회원 관리', icon: <Users size={18} /> },
-    { path: '/admin/comments', label: '댓글 관리', icon: <MessageSquare size={18} /> },
-    { path: '/admin/settings', label: '설정', icon: <Settings size={18} /> },
+    {
+      id: 'dashboard',
+      label: '대시보드',
+      icon: <LayoutDashboard size={20} />,
+      path: '/admin'
+    },
+    {
+      id: 'pricing',
+      label: '요금 관리',
+      icon: <DollarSign size={20} />,
+      path: '/admin/pricing'
+    },
+    {
+      id: 'insights',
+      label: '인사이트 관리',
+      icon: <FileText size={20} />,
+      path: '/admin/insights'
+    },
+    {
+      id: 'support',
+      label: '고객지원 관리',
+      icon: <HelpCircle size={20} />,
+      path: '/admin/support'
+    },
+    {
+      id: 'customers',
+      label: '고객 데이터',
+      icon: <Users size={20} />,
+      path: '/admin/customers'
+    },
+    {
+      id: 'settings',
+      label: '설정',
+      icon: <Settings size={20} />,
+      path: '/admin/settings'
+    }
   ];
 
   const isActive = (path) => {
@@ -44,195 +91,155 @@ const AdminPage = () => {
     return location.pathname.startsWith(path);
   };
 
+  // 로딩 중
+  if (loading) {
+    return (
+      <div className="admin-loading">
+        <div className="loading-spinner" />
+        <p>로딩 중...</p>
+      </div>
+    );
+  }
+
+  // 권한 없음
+  if (!user || user.role !== 'admin') {
+    return null;
+  }
+
   return (
-    <div className="admin-page">
+    <div className={`admin-dashboard ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
       {/* Sidebar */}
-      <aside className="admin-sidebar">
-        <div className="admin-logo">
-          <span className="logo-text">Admin</span>
-          <span className="logo-highlight">Panel</span>
+      <aside className={`admin-sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
+        <div className="sidebar-header">
+          <Link to="/" className="admin-logo">
+            <div className="logo-icon">
+              <LayoutDashboard size={24} />
+            </div>
+            {sidebarOpen && <span>APEX Admin</span>}
+          </Link>
+          <button 
+            className="sidebar-toggle"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
 
-        <nav className="admin-nav">
+        <nav className="sidebar-nav">
           {menuItems.map((item) => (
             <Link
-              key={item.path}
+              key={item.id}
               to={item.path}
               className={`nav-item ${isActive(item.path) ? 'active' : ''}`}
             >
-              {item.icon}
-              <span>{item.label}</span>
+              <span className="nav-icon">{item.icon}</span>
+              {sidebarOpen && <span className="nav-label">{item.label}</span>}
+              {sidebarOpen && isActive(item.path) && (
+                <ChevronRight size={16} className="nav-arrow" />
+              )}
             </Link>
           ))}
         </nav>
 
-        <div className="admin-user">
-          <div className="admin-avatar">{user.name?.charAt(0)}</div>
-          <div>
-            <span className="admin-name">{user.name}</span>
-            <span className="admin-role">관리자</span>
-          </div>
+        <div className="sidebar-footer">
+          <Link to="/" className="nav-item home-link">
+            <span className="nav-icon"><Home size={20} /></span>
+            {sidebarOpen && <span className="nav-label">홈페이지로</span>}
+          </Link>
+          <button className="nav-item logout-btn" onClick={handleLogout}>
+            <span className="nav-icon"><LogOut size={20} /></span>
+            {sidebarOpen && <span className="nav-label">로그아웃</span>}
+          </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="admin-main">
-        <Routes>
-          <Route index element={<Dashboard />} />
-          <Route path="posts" element={<AdminPosts />} />
-          <Route path="posts/write" element={<AdminPostWrite />} />
-          <Route path="posts/edit/:id" element={<AdminPostWrite />} />
-          <Route path="users" element={<AdminUsers />} />
-          <Route path="comments" element={<AdminComments />} />
-          <Route path="settings" element={<SettingsPage />} />
-        </Routes>
-      </main>
+      <div className="admin-main">
+        {/* Top Header */}
+        <header className="admin-header">
+          <div className="header-left">
+            <button 
+              className="mobile-menu-btn"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+              <Menu size={24} />
+            </button>
+            <div className="breadcrumb">
+              <span>관리자</span>
+              <ChevronRight size={16} />
+              <span>{menuItems.find(item => isActive(item.path))?.label || '대시보드'}</span>
+            </div>
+          </div>
+
+          <div className="header-right">
+            <button className="notification-btn">
+              <Bell size={20} />
+              {notifications > 0 && (
+                <span className="notification-badge">{notifications}</span>
+              )}
+            </button>
+            <div className="user-info">
+              <div className="user-avatar">
+                {user.name?.charAt(0) || 'A'}
+              </div>
+              <div className="user-details">
+                <span className="user-name">{user.name}</span>
+                <span className="user-role">관리자</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Content Area */}
+        <main className="admin-content">
+          <Routes>
+            <Route index element={<AdminOverview />} />
+            <Route path="pricing" element={<PricingAdmin />} />
+            <Route path="insights" element={<InsightAdmin />} />
+            <Route path="support" element={<SupportAdmin />} />
+            <Route path="customers" element={<CustomersAdmin />} />
+            <Route path="settings" element={<AdminSettings />} />
+          </Routes>
+        </main>
+      </div>
     </div>
   );
 };
 
-// Dashboard Component
-const Dashboard = () => {
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const response = await adminAPI.getStats();
-        if (response.success) {
-          setStats(response.stats);
-        }
-      } catch (error) {
-        console.error('통계 불러오기 실패:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchStats();
-  }, []);
-
-  const statCards = stats ? [
-    { label: '총 회원수', value: stats.totalUsers, change: '+5%', icon: <Users size={24} />, color: '#46D369' },
-    { label: '활성 회원', value: stats.activeUsers, change: '+8%', icon: <Eye size={24} />, color: '#E50914' },
-    { label: '총 게시물', value: stats.totalPosts, change: '+12%', icon: <FileText size={24} />, color: '#E5A00D' },
-    { label: '총 댓글', value: stats.totalComments, change: '+15%', icon: <MessageSquare size={24} />, color: '#0080FF' },
-  ] : [];
-
-  return (
-    <motion.div
-      className="dashboard"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      <div className="page-header">
-        <h1>대시보드</h1>
-        <p>OTT Share Hub 관리자 페이지에 오신 것을 환영합니다.</p>
+// Settings placeholder component
+const AdminSettings = () => (
+  <div className="admin-settings">
+    <div className="admin-page-header">
+      <h1>설정</h1>
+      <p>시스템 설정을 관리합니다.</p>
+    </div>
+    <div className="admin-card">
+      <div className="admin-card-header">
+        <h2>일반 설정</h2>
       </div>
-
-      {loading ? (
-        <div className="loading-state">데이터를 불러오는 중...</div>
-      ) : (
-        <>
-          {/* Stats Grid */}
-          <div className="stats-grid">
-            {statCards.map((stat, idx) => (
-              <div key={idx} className="stat-card">
-                <div className="stat-icon" style={{ background: `${stat.color}20`, color: stat.color }}>
-                  {stat.icon}
-                </div>
-                <div className="stat-info">
-                  <span className="stat-label">{stat.label}</span>
-                  <span className="stat-value">{stat.value}</span>
-                  <span className="stat-change positive">
-                    <TrendingUp size={14} /> {stat.change}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Charts & Activity */}
-          <div className="dashboard-grid">
-            <div className="chart-card">
-              <div className="card-header">
-                <h3><BarChart3 size={18} /> 카테고리별 게시물</h3>
-              </div>
-              <div className="chart-placeholder">
-                <div className="chart-bars">
-                  {stats && Object.entries(stats.postsByCategory).map(([key, value], idx) => (
-                    <div key={key} className="bar-wrapper">
-                      <div 
-                        className="bar" 
-                        style={{ height: `${Math.min(value * 20, 100)}%` }}
-                      />
-                      <span className="bar-label">{key}</span>
-                      <span className="bar-value">{value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="activity-card">
-              <div className="card-header">
-                <h3>시스템 현황</h3>
-              </div>
-              <div className="system-status">
-                <div className="status-item">
-                  <span className="status-label">최근 7일 신규 가입</span>
-                  <span className="status-value">{stats?.recentUsers || 0}명</span>
-                </div>
-                <div className="status-item">
-                  <span className="status-label">공지사항</span>
-                  <span className="status-value">{stats?.postsByCategory?.notice || 0}개</span>
-                </div>
-                <div className="status-item">
-                  <span className="status-label">파티 모집글</span>
-                  <span className="status-value">{stats?.postsByCategory?.party || 0}개</span>
-                </div>
-                <div className="status-item">
-                  <span className="status-label">서버 상태</span>
-                  <span className="status-value online">정상</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-    </motion.div>
-  );
-};
-
-// Settings Page Component
-const SettingsPage = () => {
-  return (
-    <motion.div
-      className="settings-page"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      <div className="page-header">
-        <h1>설정</h1>
-        <p>사이트 설정을 관리합니다.</p>
-      </div>
-
-      <div className="settings-section">
-        <h3>사이트 정보</h3>
-        <div className="settings-form">
-          <div className="input-group">
-            <label>사이트 이름</label>
-            <input type="text" defaultValue="OTT Share Hub" />
-          </div>
-          <div className="input-group">
-            <label>사이트 설명</label>
-            <textarea defaultValue="프리미엄 OTT 구독 공유 서비스" />
-          </div>
-          <button className="btn btn-primary">저장</button>
+      <div className="admin-form">
+        <div className="form-group">
+          <label>사이트 이름</label>
+          <input type="text" defaultValue="APEX Logistics" />
         </div>
+        <div className="form-group">
+          <label>관리자 이메일</label>
+          <input type="email" defaultValue="admin@apexlogistics.kr" />
+        </div>
+        <div className="form-group">
+          <label>대표 전화번호</label>
+          <input type="tel" defaultValue="1566-0000" />
+        </div>
+        <div className="form-group">
+          <label>회사 주소</label>
+          <textarea defaultValue="서울특별시 강남구 테헤란로 123 APEX타워 15층" rows={3} />
+        </div>
+        <button className="admin-btn admin-btn-primary" style={{ marginTop: '16px' }}>
+          설정 저장
+        </button>
       </div>
-    </motion.div>
-  );
-};
+    </div>
+  </div>
+);
 
 export default AdminPage;

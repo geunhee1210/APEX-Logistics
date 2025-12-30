@@ -87,6 +87,43 @@ npm start
    - **Start Command:** `npm start`
 5. 환경 변수: `NODE_ENV`=production, `JWT_SECRET`=(랜덤)
 
+## 💳 결제 시스템 (토스페이먼츠)
+
+### 테스트 모드 설정
+
+1. **토스페이먼츠 개발자 계정 생성**
+   - [토스페이먼츠 개발자센터](https://developers.tosspayments.com/) 접속
+   - 회원가입 및 로그인
+   - "내 애플리케이션" → "애플리케이션 추가"
+
+2. **테스트 키 발급**
+   - 클라이언트 키 (Client Key): 프론트엔드에서 사용
+   - 시크릿 키 (Secret Key): 백엔드에서 사용
+
+3. **환경 변수 설정**
+
+   **프론트엔드** (`frontend/.env`):
+   ```env
+   VITE_TOSS_CLIENT_KEY=test_ck_발급받은키
+   ```
+
+   **백엔드** (`backend/.env`):
+   ```env
+   TOSS_SECRET_KEY=test_sk_발급받은키
+   ```
+
+4. **테스트 카드 정보**
+   - 카드번호: `4242 4242 4242 4242`
+   - 유효기간: `12/34`
+   - CVC: `123`
+   - 비밀번호: `12` (간편결제)
+
+### 실제 운영 모드
+
+1. [토스페이먼츠 대시보드](https://dashboard.tosspayments.com/) 접속
+2. 사업자등록증 등록 및 심사 완료
+3. 운영 키 발급 및 환경 변수 업데이트
+
 ## 🔐 Demo Account
 
 - **관리자:** admin@ottshare.com / password

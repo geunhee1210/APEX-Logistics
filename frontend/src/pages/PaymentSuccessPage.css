@@ -1,0 +1,81 @@
+.payment-result-page {
+  min-height: 100vh;
+  background: var(--netflix-black);
+  color: var(--netflix-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.result-content {
+  background: var(--netflix-gray-900);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid var(--netflix-gray-700);
+}
+
+.result-content.success .result-icon {
+  color: var(--netflix-green);
+  margin-bottom: 24px;
+}
+
+.result-content.error .result-icon {
+  color: var(--netflix-red);
+  margin-bottom: 24px;
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.result-content h2 {
+  font-size: 1.75rem;
+  margin-bottom: 12px;
+}
+
+.result-content p {
+  color: var(--netflix-gray-400);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--netflix-gray-700);
+  border-top-color: var(--netflix-red);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 24px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .result-content {
+    padding: 32px 24px;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .result-actions .btn {
+    width: 100%;
+  }
+}
+
+

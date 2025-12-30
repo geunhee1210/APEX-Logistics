@@ -1,53 +1,89 @@
 /* ===================================
-   OTT Share Hub - Netflix Style Theme
+   APEX Logistics - Enterprise Theme
+   대기업 전문 물류 솔루션
+   Professional & Modern Design
    =================================== */
 
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Netflix Colors */
-  --netflix-red: #E50914;
-  --netflix-red-hover: #F40612;
-  --netflix-black: #141414;
-  --netflix-dark: #0D0D0D;
-  --netflix-gray-900: #1a1a1a;
-  --netflix-gray-800: #222222;
-  --netflix-gray-700: #2F2F2F;
-  --netflix-gray-600: #404040;
-  --netflix-gray-500: #6D6D6D;
-  --netflix-gray-400: #808080;
-  --netflix-gray-300: #B3B3B3;
-  --netflix-white: #FFFFFF;
+  /* Primary Colors - Professional Navy Theme */
+  --apex-navy: #0f172a;
+  --apex-navy-light: #1e293b;
+  --apex-navy-dark: #020617;
   
-  /* Accent Colors */
-  --accent-gold: #E5A00D;
-  --accent-green: #46D369;
-  --accent-blue: #0080FF;
+  /* Main Blue - Trust & Reliability */
+  --apex-blue: #0ea5e9;
+  --apex-blue-light: #38bdf8;
+  --apex-blue-dark: #0284c7;
+  --apex-blue-deep: #0369a1;
   
-  /* Gradients */
-  --gradient-hero: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 50%, var(--netflix-black) 100%);
-  --gradient-card: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-  --gradient-red: linear-gradient(135deg, #E50914 0%, #B20710 100%);
+  /* Accent - Teal/Cyan - Modern Logistics */
+  --apex-teal: #06b6d4;
+  --apex-teal-light: #22d3ee;
+  --apex-teal-dark: #0891b2;
   
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.7);
-  --shadow-glow: 0 0 20px rgba(229, 9, 20, 0.3);
+  /* Secondary - Slate for Professionalism */
+  --apex-slate: #475569;
+  --apex-slate-light: #64748b;
+  --apex-slate-dark: #334155;
   
-  /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
-  --transition-slow: 400ms ease;
+  /* Success/Growth - Green */
+  --apex-green: #10b981;
+  --apex-green-light: #34d399;
   
-  /* Border Radius */
-  --radius-sm: 4px;
+  /* Warning - Amber (not orange) */
+  --apex-amber: #f59e0b;
+  
+  /* Neutral Colors - Clean & Professional */
+  --apex-white: #ffffff;
+  --apex-gray-50: #f8fafc;
+  --apex-gray-100: #f1f5f9;
+  --apex-gray-200: #e2e8f0;
+  --apex-gray-300: #cbd5e1;
+  --apex-gray-400: #94a3b8;
+  --apex-gray-500: #64748b;
+  --apex-gray-600: #475569;
+  --apex-gray-700: #334155;
+  --apex-gray-800: #1e293b;
+  --apex-gray-900: #0f172a;
+  
+  /* Gradients - Professional & Clean */
+  --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+  --gradient-primary: linear-gradient(135deg, var(--apex-blue) 0%, var(--apex-blue-dark) 100%);
+  --gradient-teal: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-teal-dark) 100%);
+  --gradient-dark: linear-gradient(180deg, var(--apex-navy-dark) 0%, var(--apex-navy) 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.98) 100%);
+  
+  /* Shadows - Subtle & Professional */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+  --shadow-glow: 0 0 40px rgba(14, 165, 233, 0.2);
+  --shadow-glow-teal: 0 0 40px rgba(6, 182, 212, 0.2);
+  
+  /* Transitions - Smooth */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Border Radius - Modern */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
-  --radius-xl: 20px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
   
   /* Font */
   --font-primary: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', var(--font-primary);
 }
 
 * {
@@ -63,8 +99,8 @@ html {
 
 body {
   font-family: var(--font-primary);
-  background-color: var(--netflix-black);
-  color: var(--netflix-white);
+  background-color: var(--apex-white);
+  color: var(--apex-gray-900);
   line-height: 1.6;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -82,18 +118,21 @@ body {
    =================================== */
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
   font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--apex-gray-900);
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-h4 { font-size: 1.25rem; }
+h1 { font-size: clamp(2rem, 4.5vw, 3.25rem); }
+h2 { font-size: clamp(1.625rem, 3.5vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+h4 { font-size: 1.125rem; }
 
 p {
-  color: var(--netflix-gray-300);
+  color: var(--apex-gray-600);
+  line-height: 1.7;
 }
 
 a {
@@ -103,11 +142,11 @@ a {
 }
 
 a:hover {
-  color: var(--netflix-red);
+  color: var(--apex-blue);
 }
 
 /* ===================================
-   Buttons
+   Buttons - Professional Style
    =================================== */
 
 .btn {
@@ -116,131 +155,140 @@ a:hover {
   justify-content: center;
   gap: 8px;
   padding: 12px 24px;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 600;
+  font-family: var(--font-display);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-normal);
-  font-family: inherit;
+  text-transform: none;
+  letter-spacing: -0.01em;
 }
 
 .btn-primary {
-  background: var(--netflix-red);
-  color: var(--netflix-white);
+  background: var(--gradient-primary);
+  color: var(--apex-white);
+  box-shadow: var(--shadow-md), 0 0 0 0 rgba(14, 165, 233, 0);
 }
 
 .btn-primary:hover {
-  background: var(--netflix-red-hover);
-  transform: scale(1.02);
-  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(14, 165, 233, 0.3);
 }
 
 .btn-secondary {
-  background: rgba(109, 109, 109, 0.5);
-  color: var(--netflix-white);
+  background: var(--apex-white);
+  color: var(--apex-gray-700);
+  border: 1.5px solid var(--apex-gray-200);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:hover {
-  background: rgba(109, 109, 109, 0.7);
+  background: var(--apex-gray-50);
+  border-color: var(--apex-blue);
+  color: var(--apex-blue);
+}
+
+.btn-accent {
+  background: var(--gradient-teal);
+  color: var(--apex-white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-teal);
 }
 
 .btn-outline {
   background: transparent;
-  border: 2px solid var(--netflix-white);
-  color: var(--netflix-white);
+  border: 2px solid var(--apex-white);
+  color: var(--apex-white);
 }
 
 .btn-outline:hover {
-  background: var(--netflix-white);
-  color: var(--netflix-black);
+  background: var(--apex-white);
+  color: var(--apex-navy);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--apex-gray-600);
+}
+
+.btn-ghost:hover {
+  background: var(--apex-gray-100);
+  color: var(--apex-gray-900);
 }
 
 .btn-lg {
   padding: 16px 32px;
-  font-size: 1.125rem;
+  font-size: 1rem;
+  border-radius: var(--radius-lg);
 }
 
 .btn-sm {
   padding: 8px 16px;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
 }
 
 /* ===================================
-   Cards
+   Cards - Clean & Professional
    =================================== */
 
 .card {
-  background: var(--netflix-gray-900);
-  border-radius: var(--radius-md);
+  background: var(--apex-white);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   transition: all var(--transition-normal);
+  border: 1px solid var(--apex-gray-100);
+  box-shadow: var(--shadow-sm);
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: var(--shadow-lg);
-  z-index: 10;
-}
-
-.card-ott {
-  position: relative;
-  aspect-ratio: 16/9;
-  cursor: pointer;
-}
-
-.card-ott img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card-ott .overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: var(--gradient-card);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--apex-gray-200);
 }
 
 /* ===================================
-   Form Elements
+   Form Elements - Professional
    =================================== */
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 6px;
+  margin-bottom: 20px;
 }
 
 .input-group label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--netflix-gray-300);
+  color: var(--apex-gray-700);
 }
 
 input, textarea, select {
   width: 100%;
-  padding: 14px 16px;
-  font-size: 1rem;
+  padding: 12px 16px;
+  font-size: 0.9375rem;
   font-family: inherit;
-  background: var(--netflix-gray-700);
-  border: 1px solid var(--netflix-gray-600);
-  border-radius: var(--radius-sm);
-  color: var(--netflix-white);
+  background: var(--apex-white);
+  border: 1.5px solid var(--apex-gray-200);
+  border-radius: var(--radius-md);
+  color: var(--apex-gray-900);
   transition: all var(--transition-fast);
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: var(--netflix-red);
-  background: var(--netflix-gray-800);
+  border-color: var(--apex-blue);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
 }
 
 input::placeholder, textarea::placeholder {
-  color: var(--netflix-gray-500);
+  color: var(--apex-gray-400);
 }
 
 textarea {
@@ -254,31 +302,44 @@ textarea {
 
 .container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 4%;
+  padding: 0 24px;
+}
+
+.container-wide {
+  max-width: 1440px;
+}
+
+.container-narrow {
+  max-width: 960px;
 }
 
 .section {
-  padding: 60px 0;
+  padding: 80px 0;
 }
 
-.section-title {
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.section-dark {
+  background: var(--apex-navy);
+  color: var(--apex-white);
 }
 
-.section-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--netflix-gray-700);
+.section-dark h2,
+.section-dark h3,
+.section-dark h4 {
+  color: var(--apex-white);
+}
+
+.section-dark p {
+  color: var(--apex-gray-300);
+}
+
+.section-gray {
+  background: var(--apex-gray-50);
 }
 
 /* ===================================
-   Scrollbar
+   Scrollbar - Subtle
    =================================== */
 
 ::-webkit-scrollbar {
@@ -287,16 +348,16 @@ textarea {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--netflix-gray-900);
+  background: var(--apex-gray-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--netflix-gray-600);
+  background: var(--apex-gray-300);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--netflix-gray-500);
+  background: var(--apex-gray-400);
 }
 
 /* ===================================
@@ -319,9 +380,20 @@ textarea {
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.7; }
 }
 
 .animate-fadeIn {
@@ -333,75 +405,72 @@ textarea {
 }
 
 /* ===================================
-   Badge
+   Badge - Professional
    =================================== */
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
+  padding: 4px 12px;
   font-size: 0.75rem;
   font-weight: 600;
-  border-radius: var(--radius-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
 }
 
-.badge-red {
-  background: var(--netflix-red);
-  color: var(--netflix-white);
+.badge-primary {
+  background: rgba(14, 165, 233, 0.1);
+  color: var(--apex-blue-dark);
 }
 
-.badge-gold {
-  background: var(--accent-gold);
-  color: var(--netflix-black);
+.badge-teal {
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--apex-teal-dark);
 }
 
-.badge-green {
-  background: var(--accent-green);
-  color: var(--netflix-black);
+.badge-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
 }
 
-/* ===================================
-   Price Tag
-   =================================== */
-
-.price {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--netflix-white);
-}
-
-.price-original {
-  font-size: 1rem;
-  color: var(--netflix-gray-500);
-  text-decoration: line-through;
-}
-
-.price-discount {
-  color: var(--netflix-red);
-  font-weight: 700;
+.badge-slate {
+  background: var(--apex-gray-100);
+  color: var(--apex-gray-600);
 }
 
 /* ===================================
-   Loading Skeleton
+   Text Utilities
    =================================== */
 
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--netflix-gray-800) 25%,
-    var(--netflix-gray-700) 50%,
-    var(--netflix-gray-800) 75%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
-  border-radius: var(--radius-sm);
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-@keyframes skeleton-loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+.text-gradient-teal {
+  background: var(--gradient-teal);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===================================
+   Loading Spinner
+   =================================== */
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--apex-white);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ===================================
@@ -414,11 +483,11 @@ textarea {
   }
   
   .section {
-    padding: 40px 0;
+    padding: 60px 0;
   }
   
   .btn-lg {
     padding: 14px 24px;
-    font-size: 1rem;
+    font-size: 0.9375rem;
   }
 }

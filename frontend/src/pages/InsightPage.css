@@ -1,0 +1,511 @@
+/* ===================================
+   Insight Page - Professional Blog Listing
+   =================================== */
+
+.insight-page {
+  min-height: 100vh;
+  background: var(--apex-white);
+}
+
+/* Hero Section */
+.insight-hero {
+  padding: 140px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.insight-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/images/values-logistics-bg.jpg') center center / cover no-repeat;
+  z-index: 0;
+}
+
+.insight-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(15, 23, 42, 0.92) 0%, 
+    rgba(30, 41, 59, 0.88) 50%,
+    rgba(15, 23, 42, 0.92) 100%);
+  z-index: 1;
+}
+
+.insight-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  padding: 8px 20px;
+  background: rgba(6, 182, 212, 0.15);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: var(--radius-full);
+  color: var(--apex-teal-light);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+
+.insight-hero h1 {
+  color: var(--apex-white);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 16px;
+}
+
+.insight-hero p {
+  color: var(--apex-gray-300);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* Search Box */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-fast);
+}
+
+.search-box:focus-within {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.search-box svg {
+  color: var(--apex-gray-400);
+  flex-shrink: 0;
+}
+
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  color: var(--apex-white);
+}
+
+.search-box input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Featured Section */
+.featured-section {
+  padding: 80px 0 40px;
+  background: var(--apex-gray-50);
+}
+
+.featured-section .section-header {
+  margin-bottom: 40px;
+}
+
+.featured-section h2 {
+  font-size: 1.75rem;
+  color: var(--apex-gray-900);
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.featured-card {
+  background: var(--apex-white);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  border: 1px solid var(--apex-gray-100);
+  transition: all var(--transition-normal);
+}
+
+.featured-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-2xl);
+}
+
+.featured-card a {
+  display: block;
+}
+
+.featured-card .card-image {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.featured-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.featured-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.featured-card .card-category {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 14px;
+  background: var(--apex-blue);
+  color: var(--apex-white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+}
+
+.featured-card .card-content {
+  padding: 28px;
+}
+
+.featured-card h3 {
+  font-size: 1.375rem;
+  color: var(--apex-gray-900);
+  line-height: 1.4;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.featured-card p {
+  color: var(--apex-gray-500);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.featured-card .card-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 0.8125rem;
+  color: var(--apex-gray-400);
+  margin-bottom: 16px;
+}
+
+.featured-card .card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.featured-card .read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--apex-blue);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: gap var(--transition-fast);
+}
+
+.featured-card:hover .read-more {
+  gap: 10px;
+}
+
+/* Category Section */
+.category-section {
+  padding: 32px 0;
+  background: var(--apex-white);
+  border-bottom: 1px solid var(--apex-gray-100);
+  position: sticky;
+  top: 72px;
+  z-index: 10;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.category-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1.5px solid var(--apex-gray-200);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--apex-gray-600);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.category-tab:hover {
+  border-color: var(--apex-blue);
+  color: var(--apex-blue);
+}
+
+.category-tab.active {
+  background: var(--apex-blue);
+  border-color: var(--apex-blue);
+  color: var(--apex-white);
+}
+
+.category-tab svg {
+  flex-shrink: 0;
+}
+
+/* Posts Section */
+.posts-section {
+  padding: 60px 0 80px;
+  background: var(--apex-white);
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.post-card {
+  background: var(--apex-white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--apex-gray-100);
+  transition: all var(--transition-normal);
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--apex-gray-200);
+}
+
+.post-card a {
+  display: block;
+}
+
+.post-image {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.post-card:hover .post-image img {
+  transform: scale(1.05);
+}
+
+.post-content {
+  padding: 20px;
+}
+
+.post-category {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--apex-blue);
+  margin-bottom: 10px;
+}
+
+.post-card h3 {
+  font-size: 1.0625rem;
+  color: var(--apex-gray-900);
+  line-height: 1.4;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card p {
+  color: var(--apex-gray-500);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8125rem;
+  color: var(--apex-gray-400);
+}
+
+.post-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.no-results p {
+  font-size: 1.125rem;
+  color: var(--apex-gray-500);
+}
+
+/* Newsletter Section */
+.newsletter-section {
+  padding: 80px 0;
+  background: var(--apex-gray-50);
+}
+
+.newsletter-card {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  overflow: hidden;
+}
+
+.newsletter-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/images/cta-logistics-bg.jpg') center center / cover no-repeat;
+  z-index: 0;
+}
+
+.newsletter-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(15, 23, 42, 0.93) 0%, 
+    rgba(30, 41, 59, 0.88) 100%);
+  z-index: 1;
+}
+
+.newsletter-content, .newsletter-form {
+  position: relative;
+  z-index: 2;
+}
+
+.newsletter-content h2 {
+  color: var(--apex-white);
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.newsletter-content p {
+  color: var(--apex-gray-300);
+  font-size: 1rem;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 12px;
+}
+
+.newsletter-form input {
+  width: 300px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  color: var(--apex-white);
+  font-size: 0.9375rem;
+}
+
+.newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter-form input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .insight-hero {
+    padding: 120px 0 60px;
+  }
+  
+  .insight-hero p {
+    font-size: 1rem;
+  }
+  
+  .category-section {
+    top: 64px;
+    padding: 16px 0;
+  }
+  
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .newsletter-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 24px;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .newsletter-form input {
+    width: 100%;
+  }
+}

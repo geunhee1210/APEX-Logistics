@@ -10,6 +10,12 @@
   padding-top: 70px; /* Navbar height */
 }
 
+/* Admin pages - no navbar padding */
+.admin-main-content {
+  flex: 1;
+  padding-top: 0;
+}
+
 /* Page Transitions */
 .page-enter {
   opacity: 0;

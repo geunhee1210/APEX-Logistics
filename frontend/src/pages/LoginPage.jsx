@@ -60,7 +60,7 @@ const LoginPage = () => {
       >
         <div className="auth-header">
           <h1>로그인</h1>
-          <p>OTT Share Hub에 오신 것을 환영합니다</p>
+          <p>APEX Logistics 고객 포털에 오신 것을 환영합니다</p>
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -155,7 +155,7 @@ const LoginPage = () => {
 
         <div className="demo-info">
           <p>🔑 데모 계정</p>
-          <p>관리자: admin@ottshare.com / password</p>
+          <p>관리자: admin@apexlogistics.kr / password</p>
         </div>
       </motion.div>
     </div>

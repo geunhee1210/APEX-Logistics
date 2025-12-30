@@ -1,0 +1,203 @@
+.visual-editor-renderer {
+  position: relative;
+  width: 100%;
+  background: transparent;
+}
+
+.visual-editor-renderer.preview-mode {
+  outline: 2px dashed rgba(229, 9, 20, 0.5);
+  outline-offset: -2px;
+}
+
+.preview-indicator {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background: rgba(229, 9, 20, 0.9);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 9999;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* 기본 요소 스타일 */
+.ve-element {
+  transition: all 0.3s ease;
+}
+
+.ve-text {
+  line-height: 1.6;
+  color: inherit;
+}
+
+.ve-heading {
+  margin: 0;
+  line-height: 1.3;
+}
+
+.ve-button {
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ve-button:hover {
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+}
+
+/* 이미지/비디오 플레이스홀더 */
+.ve-image-placeholder,
+.ve-video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  color: #666;
+  font-size: 1rem;
+  border-radius: inherit;
+}
+
+.ve-video-placeholder span {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+/* 이미지 */
+.ve-image img {
+  display: block;
+  transition: transform 0.3s;
+}
+
+.ve-image:hover img {
+  transform: scale(1.02);
+}
+
+/* 비디오 */
+.ve-video video {
+  display: block;
+}
+
+/* 프리셋 스타일 - 인스타 릴스 */
+.preset-instagram-reels {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.preset-instagram-reels::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+  z-index: -1;
+  border-radius: 18px;
+}
+
+/* 인스타 스토리 */
+.preset-instagram-story {
+  border-radius: 16px;
+  border: 3px solid;
+  border-image: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737) 1;
+  overflow: hidden;
+}
+
+/* 틱톡 */
+.preset-tiktok {
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 0, 127, 0.3);
+}
+
+/* 유튜브 썸네일 */
+.preset-youtube-thumbnail {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 카드뉴스 */
+.preset-card-news-vertical,
+.preset-card-news-square {
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* 후기 */
+.ve-testimonial {
+  border-radius: 16px;
+}
+
+.ve-testimonial .testimonial-avatar {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+/* 인용구 */
+.ve-quote {
+  font-size: 1.125rem;
+}
+
+/* 카드뉴스 그리드 */
+.ve-cardnews .cardnews-item {
+  transition: transform 0.3s;
+}
+
+.ve-cardnews .cardnews-item:hover {
+  transform: translateY(-4px);
+}
+
+.ve-cardnews .cardnews-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.ve-cardnews .cardnews-item h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.ve-cardnews .cardnews-item p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #999;
+}
+
+/* 구분선 */
+.ve-divider {
+  margin: 0;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .preview-indicator {
+    top: auto;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 0.75rem;
+  }
+  
+  .ve-cardnews {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+

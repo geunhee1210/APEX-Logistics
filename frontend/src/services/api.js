@@ -27,7 +27,7 @@ export const logout = () => {
 };
 
 // API 요청 헬퍼
-const apiRequest = async (endpoint, options = {}) => {
+export const apiRequest = async (endpoint, options = {}) => {
   const token = getToken();
   const headers = {
     'Content-Type': 'application/json',
@@ -245,6 +245,53 @@ export const adminAPI = {
   deleteOTT: async (id) => {
     return await apiRequest(`/admin/ott/${id}`, {
       method: 'DELETE'
+    });
+  },
+
+  // 홈페이지 설정 관리
+  getHomepageSettings: async () => {
+    return await apiRequest('/homepage-settings');
+  },
+
+  updateHomepageSettings: async (settings) => {
+    return await apiRequest('/homepage-settings', {
+      method: 'PUT',
+      body: JSON.stringify(settings)
+    });
+  },
+
+  // 페이지 빌더 관리
+  getPages: async () => {
+    return await apiRequest('/pages');
+  },
+
+  getPage: async (id) => {
+    return await apiRequest(`/pages/${id}`);
+  },
+
+  createPage: async (pageData) => {
+    return await apiRequest('/pages', {
+      method: 'POST',
+      body: JSON.stringify(pageData)
+    });
+  },
+
+  updatePage: async (id, pageData) => {
+    return await apiRequest(`/pages/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(pageData)
+    });
+  },
+
+  deletePage: async (id) => {
+    return await apiRequest(`/pages/${id}`, {
+      method: 'DELETE'
+    });
+  },
+
+  duplicatePage: async (id) => {
+    return await apiRequest(`/pages/${id}/duplicate`, {
+      method: 'POST'
     });
   }
 };

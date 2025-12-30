@@ -1,0 +1,17 @@
+.typewriter {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.typewriter-text {
+  color: var(--netflix-red);
+  font-weight: inherit;
+}
+
+.typewriter-cursor {
+  color: var(--netflix-red);
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+

@@ -1,242 +1,361 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, Filter, Play, Star, Users, Clock } from 'lucide-react';
-import { ottAPI } from '../services/api';
+import { 
+  Package, 
+  Truck, 
+  Globe, 
+  Thermometer, 
+  Cpu,
+  Ship,
+  Plane,
+  Warehouse,
+  CheckCircle2,
+  ArrowRight,
+  Phone,
+  Building2
+} from 'lucide-react';
 import './CatalogPage.css';
 
 const CatalogPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedService, setSelectedService] = useState(null);
-  const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [activeService, setActiveService] = useState(null);
 
-  const categories = [
-    { id: 'all', name: '전체' },
-    { id: '영화/드라마', name: '영화/드라마' },
-    { id: '음악', name: '음악' },
-    { id: '영상', name: '영상' },
-    { id: '애니메이션', name: '애니메이션' },
+  const services = [
+    {
+      id: 'ecommerce',
+      icon: <Package size={40} />,
+      name: '이커머스 풀필먼트',
+      shortDesc: '온라인 셀러를 위한 원스톱 물류',
+      description: '입고부터 출고까지 모든 물류 프로세스를 한 번에 해결합니다. AI 기반 재고 관리와 당일 출고 시스템으로 고객 만족도를 극대화합니다.',
+      image: '/images/ecommerce-fulfillment.jpg',
+      color: '#2563eb',
+      features: [
+        '실시간 재고 관리 (WMS)',
+        '당일 출고 보장',
+        '반품 처리 자동화',
+        '쇼핑몰 API 연동',
+        '맞춤형 패키징',
+        '데이터 리포트'
+      ],
+      benefits: ['출고 정확도 99.9%', '당일 출고율 98%', '물류비 30% 절감']
+    },
+    {
+      id: 'b2b',
+      icon: <Building2 size={40} />,
+      name: 'B2B 물류',
+      shortDesc: '대기업 맞춤형 공급망 솔루션',
+      description: '복잡한 B2B 물류를 효율적으로 관리합니다. JIT 배송, VMI 운영, 통합 물류 관리로 공급망을 최적화하고 비용을 절감합니다.',
+      image: '/images/b2b-logistics.jpg',
+      color: '#0891b2',
+      features: [
+        '공급망 최적화 컨설팅',
+        'JIT(Just-In-Time) 배송',
+        'VMI(Vendor Managed Inventory)',
+        '통합 물류 관리',
+        '전담 매니저 배정',
+        'EDI 연동'
+      ],
+      benefits: ['재고 비용 40% 절감', '배송 리드타임 50% 단축', '운영 효율 35% 향상']
+    },
+    {
+      id: 'global',
+      icon: <Globe size={40} />,
+      name: '글로벌 물류',
+      shortDesc: '28개국 네트워크 크로스보더 물류',
+      description: '글로벌 네트워크를 통한 수출입 물류 서비스입니다. 통관 대행부터 라스트마일 배송까지 원스톱으로 지원합니다.',
+      image: '/images/global-logistics.jpg',
+      color: '#7c3aed',
+      features: [
+        '수출입 통관 대행',
+        '해상/항공 운송',
+        'FBA/FBM 입고 대행',
+        '관세 컨설팅',
+        '글로벌 라스트마일',
+        '실시간 화물 추적'
+      ],
+      benefits: ['28개국 배송 커버리지', '통관 성공률 99.5%', '운송비 20% 절감']
+    },
+    {
+      id: 'cold',
+      icon: <Thermometer size={40} />,
+      name: '콜드체인',
+      shortDesc: '온도 관리 신선/의약품 물류',
+      description: '신선식품과 의약품을 위한 온도 관리 물류입니다. IoT 센서로 실시간 온도를 모니터링하여 품질을 보장합니다.',
+      image: '/images/cold-chain.jpg',
+      color: '#0d9488',
+      features: [
+        '실시간 온도 모니터링',
+        '냉장/냉동 보관',
+        'HACCP 인증 센터',
+        '의약품 GDP 인증',
+        '콜드체인 배송',
+        '온도 이력 리포트'
+      ],
+      benefits: ['온도 편차 ±0.5°C', 'HACCP/GDP 인증', '신선도 유지율 99%']
+    },
+    {
+      id: 'transport',
+      icon: <Truck size={40} />,
+      name: '화물 운송',
+      shortDesc: '전국 네트워크 통합 운송',
+      description: '전국 물류 네트워크를 통한 화물 운송 서비스입니다. 정기/비정기 배송, 긴급 배송까지 다양한 니즈에 대응합니다.',
+      image: '/images/transportation.jpg',
+      color: '#ea580c',
+      features: [
+        '전국 배송 네트워크',
+        '정기 배송 서비스',
+        '긴급 배송',
+        '대형/특수 화물',
+        'GPS 실시간 추적',
+        '배송 일정 최적화'
+      ],
+      benefits: ['전국 익일 배송', '정시 배송률 99%', '배송 사고율 0.01%']
+    },
+    {
+      id: 'it',
+      icon: <Cpu size={40} />,
+      name: '물류 IT 솔루션',
+      shortDesc: 'WMS/TMS/OMS 통합 시스템',
+      description: '자체 개발한 물류 IT 솔루션으로 물류 현황을 실시간으로 파악하고 효율적으로 관리할 수 있습니다.',
+      image: '/images/it-solution.jpg',
+      color: '#4f46e5',
+      features: [
+        'WMS (창고관리시스템)',
+        'TMS (운송관리시스템)',
+        'OMS (주문관리시스템)',
+        'API 연동 지원',
+        '대시보드/리포트',
+        '커스터마이징'
+      ],
+      benefits: ['운영 효율 50% 향상', '실시간 데이터 연동', '맞춤형 개발 지원']
+    },
   ];
 
-  // OTT 서비스 불러오기
-  useEffect(() => {
-    const fetchServices = async () => {
-      setLoading(true);
-      try {
-        const params = {
-          ...(selectedCategory !== 'all' && { category: selectedCategory }),
-          ...(searchTerm && { search: searchTerm })
-        };
-        const response = await ottAPI.getServices(params);
-        if (response.success) {
-          // 프론트엔드에서 추가 정보 계산
-          const enhancedServices = response.services.map(service => ({
-            ...service,
-            sharePrice: Math.floor(service.price / service.maxMembers),
-            discount: Math.floor(((service.price - (service.price / service.maxMembers)) / service.price) * 100),
-            rating: (Math.random() * 0.5 + 4.5).toFixed(1),
-            members: Math.floor(Math.random() * 2000 + 500),
-            features: getFeatures(service.id)
-          }));
-          setServices(enhancedServices);
-        }
-      } catch (error) {
-        console.error('OTT 서비스 불러오기 실패:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchServices();
-  }, [selectedCategory, searchTerm]);
-
-  const getFeatures = (serviceId) => {
-    const featuresMap = {
-      netflix: ['4K UHD 화질', '동시 4화면', '광고 없음', '다운로드 지원'],
-      disney: ['마블 전작품', '픽사 애니메이션', '스타워즈', '4K 지원'],
-      watcha: ['영화 추천 AI', '큐레이션', '독점 콘텐츠', 'HD 화질'],
-      wavve: ['지상파 실시간', 'KBS/MBC/SBS', '스포츠 중계', '4K 지원'],
-      tving: ['tvN 드라마', 'OCN 영화', '스포츠', '오리지널'],
-      coupangplay: ['스포츠 중계', '독점 콘텐츠', '빠른 업데이트', '로켓와우'],
-      spotify: ['1억곡 이상', '오프라인 저장', '고음질', '팟캐스트'],
-      youtube: ['광고 제거', '백그라운드 재생', 'YouTube Music', '오프라인'],
-      applemusic: ['무손실 오디오', '공간 음향', '1억곡+', 'Apple 연동'],
-      laftel: ['애니 전문', '자막/더빙', 'HD 화질', '신작 업데이트']
-    };
-    return featuresMap[serviceId] || ['프리미엄 콘텐츠', '고화질 스트리밍', '다중 기기 지원'];
-  };
-
-  const filteredServices = services.filter((service) => {
-    const matchesSearch = service.name.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesSearch;
-  });
+  const industries = [
+    { name: '패션/의류', icon: '👕', desc: '시즌별 물량 대응, 반품 처리' },
+    { name: '식품/음료', icon: '🍎', desc: '콜드체인, HACCP 인증' },
+    { name: '화장품/뷰티', icon: '💄', desc: '소량 다품종, 정교한 관리' },
+    { name: '전자제품', icon: '📱', desc: '안전 보관, A/S 물류' },
+    { name: '헬스케어', icon: '💊', desc: 'GDP 인증, 의약품 물류' },
+    { name: '가구/인테리어', icon: '🛋️', desc: '대형 화물, 설치 배송' },
+  ];
 
   return (
     <div className="catalog-page">
-      {/* Header */}
-      <section className="catalog-header">
+      {/* Hero Section */}
+      <section className="catalog-hero">
         <div className="container">
-          <h1>OTT 서비스</h1>
-          <p>프리미엄 서비스를 합리적인 가격으로 이용하세요</p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="hero-content"
+          >
+            <span className="hero-badge">SERVICES</span>
+            <h1>통합 물류 서비스</h1>
+            <p>
+              비즈니스 규모와 업종에 최적화된<br />
+              맞춤형 물류 솔루션을 제공합니다.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-          {/* Search & Filter */}
-          <div className="catalog-controls">
-            <div className="search-box">
-              <Search size={20} />
-              <input
-                type="text"
-                placeholder="서비스 검색..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+      {/* Services Grid */}
+      <section className="services-grid-section">
+        <div className="container">
+          <div className="services-grid">
+            {services.map((service, idx) => (
+              <motion.div
+                key={service.id}
+                className={`service-card ${activeService === service.id ? 'active' : ''}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                onClick={() => setActiveService(activeService === service.id ? null : service.id)}
+              >
+                <div className="card-header" style={{ background: service.color }}>
+                  <div className="card-icon">{service.icon}</div>
+                  <h3>{service.name}</h3>
+                  <p>{service.shortDesc}</p>
+                </div>
+                
+                <div className="card-body">
+                  <p className="card-description">{service.description}</p>
+                  
+                  <div className="card-features">
+                    <h4>주요 서비스</h4>
+                    <ul>
+                      {service.features.slice(0, 4).map((feature, fidx) => (
+                        <li key={fidx}>
+                          <CheckCircle2 size={16} />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="card-benefits">
+                    {service.benefits.map((benefit, bidx) => (
+                      <span key={bidx} className="benefit-tag">{benefit}</span>
+                    ))}
+                  </div>
+
+                  <Link to="/pricing" className="btn btn-primary card-btn">
+                    견적 문의 <ArrowRight size={18} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industries Section */}
+      <section className="industries-section section section-gray">
+        <div className="container">
+          <div className="section-header">
+            <h2>산업별 맞춤 솔루션</h2>
+            <p>다양한 산업군의 물류 노하우를 보유하고 있습니다</p>
+          </div>
+
+          <div className="industries-grid">
+            {industries.map((industry, idx) => (
+              <motion.div
+                key={idx}
+                className="industry-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.05 }}
+                viewport={{ once: true }}
+              >
+                <span className="industry-icon">{industry.icon}</span>
+                <h4>{industry.name}</h4>
+                <p>{industry.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="process-section section">
+        <div className="container">
+          <div className="section-header">
+            <h2>서비스 도입 프로세스</h2>
+            <p>간단한 4단계로 물류 서비스를 시작하세요</p>
+          </div>
+
+          <div className="process-timeline">
+            <div className="process-step">
+              <div className="step-number">01</div>
+              <div className="step-content">
+                <h4>상담 신청</h4>
+                <p>물류 현황과 니즈를 파악합니다</p>
+              </div>
             </div>
-            
-            <div className="category-filter">
-              <Filter size={18} />
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  className={`filter-btn ${selectedCategory === cat.id ? 'active' : ''}`}
-                  onClick={() => setSelectedCategory(cat.id)}
-                >
-                  {cat.name}
-                </button>
-              ))}
+            <div className="process-line" />
+            <div className="process-step">
+              <div className="step-number">02</div>
+              <div className="step-content">
+                <h4>현장 방문</h4>
+                <p>전문가가 직접 분석합니다</p>
+              </div>
+            </div>
+            <div className="process-line" />
+            <div className="process-step">
+              <div className="step-number">03</div>
+              <div className="step-content">
+                <h4>맞춤 제안</h4>
+                <p>최적의 솔루션을 제안합니다</p>
+              </div>
+            </div>
+            <div className="process-line" />
+            <div className="process-step">
+              <div className="step-number">04</div>
+              <div className="step-content">
+                <h4>서비스 시작</h4>
+                <p>물류 운영을 개시합니다</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="catalog-grid-section">
+      {/* CTA Section */}
+      <section className="catalog-cta-section">
         <div className="container">
-          {loading ? (
-            <div className="loading-grid">
-              {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="service-card skeleton">
-                  <div className="skeleton-header" />
-                  <div className="skeleton-body">
-                    <div className="skeleton-line" />
-                    <div className="skeleton-line short" />
-                  </div>
-                </div>
-              ))}
+          <div className="cta-content">
+            <h2>물류 서비스가 필요하신가요?</h2>
+            <p>전문 컨설턴트가 최적의 솔루션을 제안해드립니다</p>
+            <div className="cta-buttons">
+              <Link to="/pricing" className="btn btn-accent btn-lg">
+                견적 문의하기 <ArrowRight size={20} />
+              </Link>
+              <a href="tel:1566-0000" className="btn btn-outline btn-lg">
+                <Phone size={20} />
+                1566-0000
+              </a>
             </div>
-          ) : (
-            <div className="catalog-grid">
-              {filteredServices.map((service, idx) => (
-                <motion.div
-                  key={service.id}
-                  className="service-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  onClick={() => setSelectedService(service)}
-                >
-                  <div 
-                    className="service-card-header"
-                    style={{ background: `linear-gradient(135deg, ${service.color} 0%, ${service.color}99 100%)` }}
-                  >
-                    <span className="service-logo">{service.logo}</span>
-                    <span className="discount-badge">-{service.discount}%</span>
-                  </div>
-                  
-                  <div className="service-card-body">
-                    <h3>{service.name}</h3>
-                    
-                    <div className="service-meta">
-                      <span className="meta-item">
-                        <Star size={14} /> {service.rating}
-                      </span>
-                      <span className="meta-item">
-                        <Users size={14} /> {service.members.toLocaleString()}명
-                      </span>
-                    </div>
-                    
-                    <div className="service-pricing">
-                      <span className="original">₩{service.price.toLocaleString()}</span>
-                      <span className="share">₩{service.sharePrice.toLocaleString()}</span>
-                      <span className="period">/월</span>
-                    </div>
-                    
-                    <button className="btn btn-primary service-btn">
-                      <Play size={16} />
-                      구독하기
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
-
-          {!loading && filteredServices.length === 0 && (
-            <div className="no-results">
-              <p>검색 결과가 없습니다.</p>
-            </div>
-          )}
+          </div>
         </div>
       </section>
 
       {/* Service Detail Modal */}
-      {selectedService && (
-        <div className="modal-overlay" onClick={() => setSelectedService(null)}>
+      {activeService && (
+        <div className="modal-overlay" onClick={() => setActiveService(null)}>
           <motion.div
             className="service-modal"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div 
-              className="modal-header"
-              style={{ background: `linear-gradient(135deg, ${selectedService.color} 0%, ${selectedService.color}99 100%)` }}
-            >
-              <span className="modal-logo">{selectedService.logo}</span>
-              <div>
-                <h2>{selectedService.name}</h2>
-                <span className="modal-discount">-{selectedService.discount}% 할인</span>
-              </div>
-              <button className="modal-close" onClick={() => setSelectedService(null)}>×</button>
-            </div>
-            
-            <div className="modal-body">
-              <p className="modal-desc">{selectedService.description}</p>
-              
-              <div className="modal-stats">
-                <div className="stat">
-                  <Star size={20} />
-                  <span>{selectedService.rating}</span>
-                  <label>평점</label>
-                </div>
-                <div className="stat">
-                  <Users size={20} />
-                  <span>{selectedService.members.toLocaleString()}</span>
-                  <label>이용자</label>
-                </div>
-                <div className="stat">
-                  <Clock size={20} />
-                  <span>최대 {selectedService.maxMembers}명</span>
-                  <label>공유 가능</label>
-                </div>
-              </div>
-              
-              <div className="modal-features">
-                <h4>주요 기능</h4>
-                <ul>
-                  {selectedService.features.map((feature, idx) => (
-                    <li key={idx}>✓ {feature}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="modal-pricing">
-                <div className="price-info">
-                  <span className="original">정가 ₩{selectedService.price.toLocaleString()}</span>
-                  <span className="share">₩{selectedService.sharePrice.toLocaleString()}<span>/월</span></span>
-                </div>
-                <button className="btn btn-primary btn-lg">지금 구독하기</button>
-              </div>
-            </div>
+            {(() => {
+              const service = services.find(s => s.id === activeService);
+              return (
+                <>
+                  <div className="modal-header" style={{ background: service.color }}>
+                    <div className="modal-icon">{service.icon}</div>
+                    <div>
+                      <h2>{service.name}</h2>
+                      <p>{service.shortDesc}</p>
+                    </div>
+                    <button className="modal-close" onClick={() => setActiveService(null)}>×</button>
+                  </div>
+                  
+                  <div className="modal-body">
+                    <p className="modal-desc">{service.description}</p>
+                    
+                    <div className="modal-features">
+                      <h4>제공 서비스</h4>
+                      <ul>
+                        {service.features.map((feature, idx) => (
+                          <li key={idx}>
+                            <CheckCircle2 size={18} />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="modal-benefits">
+                      <h4>기대 효과</h4>
+                      <div className="benefits-grid">
+                        {service.benefits.map((benefit, idx) => (
+                          <div key={idx} className="benefit-item">{benefit}</div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="modal-actions">
+                      <Link to="/pricing" className="btn btn-primary btn-lg">
+                        견적 문의하기
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
           </motion.div>
         </div>
       )}
