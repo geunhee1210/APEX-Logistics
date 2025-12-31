@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
+import { 
   LayoutDashboard,
   DollarSign,
   FileText,
@@ -168,7 +168,7 @@ const AdminPage = () => {
               <span>관리자</span>
               <ChevronRight size={16} />
               <span>{menuItems.find(item => isActive(item.path))?.label || '대시보드'}</span>
-            </div>
+              </div>
           </div>
 
           <div className="header-right">

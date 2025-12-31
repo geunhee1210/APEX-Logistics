@@ -39,8 +39,8 @@ const HomePage = () => {
       
       const targets = { clients: 500, centers: 42, countries: 28, deliveries: 15 };
       let step = 0;
-
-      const timer = setInterval(() => {
+    
+    const timer = setInterval(() => {
         step++;
         const progress = step / steps;
         setStats({
@@ -52,12 +52,12 @@ const HomePage = () => {
         if (step >= steps) clearInterval(timer);
       }, interval);
 
-      return () => clearInterval(timer);
+    return () => clearInterval(timer);
     }
   }, [isStatsInView]);
 
   const services = [
-    {
+      {
       icon: <Package size={32} />,
       title: '이커머스 풀필먼트',
       desc: '입고부터 출고까지 원스톱 물류 서비스. AI 기반 재고 관리와 당일 출고 시스템으로 고객 만족도를 높입니다.',
@@ -154,7 +154,7 @@ const HomePage = () => {
                 <ArrowRight size={20} />
               </Link>
               <button className="btn btn-outline btn-lg video-btn">
-                <Play size={20} />
+                  <Play size={20} />
                 회사 소개 영상
               </button>
             </div>
@@ -250,16 +250,16 @@ const HomePage = () => {
               <span className="stat-number">{stats.countries}</span>
               <span className="stat-label">서비스 국가</span>
             </motion.div>
-            <motion.div 
+                <motion.div
               className="stat-item"
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              viewport={{ once: true }}
-            >
+                  viewport={{ once: true }}
+                >
               <span className="stat-number">{stats.deliveries}M+</span>
               <span className="stat-label">연간 배송건수</span>
-            </motion.div>
+                </motion.div>
           </div>
         </div>
       </section>
@@ -267,12 +267,12 @@ const HomePage = () => {
       {/* Services Section */}
       <section className="section services-section">
         <div className="container">
-          <motion.div 
+            <motion.div 
             className="section-header"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+              viewport={{ once: true }}
+            >
             <span className="section-badge badge badge-primary">SERVICES</span>
             <h2>통합 물류 솔루션</h2>
             <p>비즈니스 규모와 업종에 최적화된 맞춤형 물류 서비스를 제공합니다.</p>
@@ -282,10 +282,10 @@ const HomePage = () => {
             <div className="services-tabs">
               {services.map((service, idx) => (
                 <motion.button
-                  key={idx}
+                    key={idx}
                   className={`service-tab ${activeService === idx ? 'active' : ''}`}
                   onClick={() => setActiveService(idx)}
-                  initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   viewport={{ once: true }}
@@ -328,10 +328,10 @@ const HomePage = () => {
 
       {/* Values Section */}
       <section className="section section-dark values-section">
-        <div className="container">
+          <div className="container">
           <motion.div 
             className="section-header"
-            initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
@@ -364,12 +364,12 @@ const HomePage = () => {
       <section className="section why-section">
         <div className="container">
           <div className="why-content">
-            <motion.div 
+                <motion.div 
               className="why-text"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
+                  viewport={{ once: true }}
+                >
               <span className="section-badge badge badge-primary">WHY APEX</span>
               <h2>왜 APEX Logistics인가요?</h2>
               <p className="why-desc">
@@ -394,8 +394,8 @@ const HomePage = () => {
                   <div>
                     <h4>IT 기술력</h4>
                     <p>자체 개발 WMS/TMS로 실시간 물류 현황을 투명하게 공유합니다.</p>
-                  </div>
-                </div>
+              </div>
+            </div>
                 <div className="why-feature">
                   <div className="feature-check">
                     <CheckCircle2 size={20} />
@@ -403,8 +403,8 @@ const HomePage = () => {
                   <div>
                     <h4>확장성</h4>
                     <p>사업 성장에 따라 유연하게 물류 역량을 확장할 수 있습니다.</p>
-                  </div>
-                </div>
+                      </div>
+                      </div>
               </div>
 
               <Link to="/pricing" className="btn btn-primary btn-lg">
@@ -449,8 +449,8 @@ const HomePage = () => {
                     <h4>운영 시작</h4>
                     <p>물류 서비스 개시</p>
                   </div>
-                </div>
-              </div>
+            </div>
+            </div>
             </motion.div>
           </div>
         </div>
@@ -500,7 +500,7 @@ const HomePage = () => {
               </div>
             </motion.div>
 
-            <motion.div
+            <motion.div 
               className="showcase-item"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

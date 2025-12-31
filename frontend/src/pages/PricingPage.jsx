@@ -175,7 +175,7 @@ const PricingPage = () => {
                 <span>{cat.name}</span>
               </button>
             ))}
-          </div>
+            </div>
         </div>
       </section>
 
@@ -183,7 +183,7 @@ const PricingPage = () => {
       <section className="pricing-details-section">
         <div className="container">
           <div className="pricing-content">
-            <motion.div 
+              <motion.div
               className="pricing-info"
               key={activeCategory}
               initial={{ opacity: 0, x: -20 }}
@@ -293,7 +293,7 @@ const PricingPage = () => {
                     />
                   </div>
                 </div>
-
+                
                 <div className="form-group">
                   <label>서비스 유형</label>
                   <select 
@@ -306,7 +306,7 @@ const PricingPage = () => {
                     ))}
                   </select>
                 </div>
-
+                
                 <div className="form-row">
                   <div className="form-group">
                     <label>예상 월 물량 (건)</label>
@@ -329,7 +329,7 @@ const PricingPage = () => {
                     />
                   </div>
                 </div>
-
+                
                 <div className="form-group">
                   <label>추가 요청사항</label>
                   <textarea 

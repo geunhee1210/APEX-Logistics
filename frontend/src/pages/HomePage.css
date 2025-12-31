@@ -593,8 +593,8 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-}
-
+  }
+  
 .value-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -603,42 +603,42 @@
   padding: 36px 28px;
   text-align: center;
   transition: all var(--transition-normal);
-}
-
+  }
+  
 .value-card:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-8px);
   border-color: rgba(255, 255, 255, 0.2);
-}
-
+  }
+  
 .value-icon {
   width: 64px;
   height: 64px;
   margin: 0 auto 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
+    justify-content: center;
   background: var(--gradient-accent);
   border-radius: var(--radius-lg);
   color: var(--apex-white);
-}
-
+  }
+  
 .value-card h3 {
   font-size: 1.5rem;
   font-weight: 800;
   color: var(--apex-white);
   margin-bottom: 4px;
   letter-spacing: 1px;
-}
-
+  }
+  
 .value-subtitle {
   display: block;
   font-size: 0.875rem;
   color: var(--apex-teal);
   font-weight: 600;
   margin-bottom: 12px;
-}
-
+  }
+  
 .value-card p {
   font-size: 0.9375rem;
   color: var(--apex-gray-400);
@@ -990,7 +990,7 @@
   }
 
   .client-logos {
-    justify-content: center;
+  justify-content: center;
   }
 
   .hero-buttons {
@@ -1001,7 +1001,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     padding: 40px;
-  }
+}
 
   .stat-number {
     font-size: 2.5rem;
@@ -1069,7 +1069,7 @@
 
   .tab-content p {
     display: none;
-  }
+}
 
   .service-detail {
     padding: 32px 24px;
@@ -1093,7 +1093,7 @@
 
   .showcase-overlay {
     padding: 24px;
-  }
+}
 
   .showcase-overlay h3 {
     font-size: 1.25rem;
@@ -1129,5 +1129,5 @@
   .cta-contact {
     flex-direction: column;
     gap: 16px;
-  }
+}
 }
