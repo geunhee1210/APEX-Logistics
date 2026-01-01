@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Web Experience | NEXUS CREATIVE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="service-page.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-circle"></div>
+        <span class="cursor-text">EXPLORE</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <a href="index.html" class="logo-text glitch-hover" data-text="NEXUS">NEXUS</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link magnetic">HOME</a>
+            <a href="index.html#about" class="nav-link magnetic">ABOUT</a>
+            <a href="index.html#services" class="nav-link magnetic">SERVICES</a>
+            <a href="index.html#works" class="nav-link magnetic">WORKS</a>
+            <a href="index.html#contact" class="nav-link magnetic">CONTACT</a>
+        </div>
+        <a href="index.html#contact" class="nav-cta magnetic">
+            <span>GET IN TOUCH</span>
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <canvas id="service-canvas"></canvas>
+        <div class="service-hero-content">
+            <div class="service-breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="index.html#services">Services</a>
+                <span>/</span>
+                <span class="current">3D Web Experience</span>
+            </div>
+            
+            <div class="service-number">01</div>
+            <h1 class="service-title">
+                <span class="title-main glitch" data-text="3D Web">3D Web</span>
+                <span class="title-sub neon">Experience</span>
+            </h1>
+            
+            <p class="service-tagline">
+                Three.js · WebGL 기반의 차세대 3D 웹 경험 설계
+            </p>
+            
+            <p class="service-description">
+                단순한 시각 효과를 넘어, 실시간 인터랙션과 물리 기반 움직임으로<br>
+                브랜드의 몰입도를 극대화합니다.
+            </p>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Services Detail -->
+    <section class="service-detail">
+        <div class="detail-grid">
+            <div class="detail-item" data-index="01">
+                <div class="detail-icon">
+                    <svg viewBox="0 0 100 100">
+                        <polygon points="50,10 90,30 90,70 50,90 10,70 10,30" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="50" cy="50" r="15" fill="currentColor" opacity="0.3"/>
+                    </svg>
+                </div>
+                <h3 class="detail-title">Three.js Development</h3>
+                <p class="detail-desc">
+                    Three.js를 활용한 고성능 3D 웹 애플리케이션 개발.
+                    복잡한 3D 씬 구성과 최적화된 렌더링 파이프라인을 구축합니다.
+                </p>
+                <ul class="detail-features">
+                    <li>Custom 3D Scene Creation</li>
+                    <li>Performance Optimization</li>
+                    <li>Cross-browser Compatibility</li>
+                </ul>
+            </div>
+
+            <div class="detail-item" data-index="02">
+                <div class="detail-icon">
+                    <svg viewBox="0 0 100 100">
+                        <rect x="20" y="20" width="60" height="60" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="35" cy="35" r="8" fill="currentColor"/>
+                        <circle cx="65" cy="65" r="8" fill="currentColor"/>
+                        <line x1="35" y1="35" x2="65" y2="65" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="detail-title">WebGL Shader Programming</h3>
+                <p class="detail-desc">
+                    커스텀 GLSL 셰이더로 독창적인 비주얼 이펙트 구현.
+                    물, 불, 파티클 등 자연 현상부터 추상적 효과까지.
+                </p>
+                <ul class="detail-features">
+                    <li>Custom GLSL Shaders</li>
+                    <li>Post-processing Effects</li>
+                    <li>Procedural Textures</li>
+                </ul>
+            </div>
+
+            <div class="detail-item" data-index="03">
+                <div class="detail-icon">
+                    <svg viewBox="0 0 100 100">
+                        <path d="M50 20 L80 40 L80 70 L50 90 L20 70 L20 40 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M50 20 L50 50 L80 70" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M50 50 L20 70" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="detail-title">3D Model Integration</h3>
+                <p class="detail-desc">
+                    제품, 건축, 캐릭터 등 다양한 3D 모델의 웹 통합.
+                    GLTF, FBX, OBJ 포맷 지원 및 실시간 로딩 최적화.
+                </p>
+                <ul class="detail-features">
+                    <li>Model Optimization</li>
+                    <li>Texture Baking</li>
+                    <li>Animation Rigging</li>
+                </ul>
+            </div>
+
+            <div class="detail-item" data-index="04">
+                <div class="detail-icon">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="30" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M35 50 Q50 80 65 50" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="50" cy="70" r="5" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h3 class="detail-title">Real-time Physics Simulation</h3>
+                <p class="detail-desc">
+                    물리 엔진 기반의 실시간 시뮬레이션으로 현실감 있는 인터랙션.
+                    중력, 충돌, 유체 역학 등을 웹에서 구현합니다.
+                </p>
+                <ul class="detail-features">
+                    <li>Cannon.js / Ammo.js Integration</li>
+                    <li>Soft Body Dynamics</li>
+                    <li>Particle Systems</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-stack">
+        <h2 class="tech-title">TECH STACK</h2>
+        <div class="tech-grid">
+            <div class="tech-item">Three.js</div>
+            <div class="tech-item">WebGL</div>
+            <div class="tech-item">GLSL</div>
+            <div class="tech-item">React Three Fiber</div>
+            <div class="tech-item">Cannon.js</div>
+            <div class="tech-item">Blender</div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="service-cta">
+        <div class="cta-content">
+            <h2 class="cta-title">
+                3D 웹 경험이 필요하신가요?<br>
+                <span class="neon">지금 상담하세요.</span>
+            </h2>
+            <p class="cta-desc">
+                프로젝트의 규모와 목표에 맞는 최적의 솔루션을 제안해드립니다.
+            </p>
+            <a href="index.html#contact" class="cta-btn magnetic">
+                <span>프로젝트 문의하기</span>
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Other Services -->
+    <section class="other-services">
+        <h2 class="other-title">OTHER SERVICES</h2>
+        <div class="other-grid">
+            <a href="interactive.html" class="other-item magnetic">
+                <span class="other-num">02</span>
+                <span class="other-name">Interactive Campaign</span>
+                <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="motion.html" class="other-item magnetic">
+                <span class="other-num">03</span>
+                <span class="other-name">Motion & Animation</span>
+                <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="ar-vr.html" class="other-item magnetic">
+                <span class="other-num">04</span>
+                <span class="other-name">AR / VR Experience</span>
+                <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-logo">NEXUS</span>
+                <p class="footer-tagline">Creating impossible digital dreams</p>
+            </div>
+            <div class="footer-copyright">
+                <span>© 2024 NEXUS CREATIVE. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="service-page.js"></script>
+</body>
+</html>
+

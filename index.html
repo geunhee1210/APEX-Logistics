@@ -19,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     
-    <link rel="stylesheet" href="styles.css?v=20260114">
+    <link rel="stylesheet" href="styles.css?v=20260133">
   </head>
   <body>
     <!-- ★★★ GLOBAL SPIRIT CHARACTER - Moves across entire page ★★★ -->
@@ -279,6 +279,349 @@
         </div>
     </section>
 
+    <!-- ★★★ TEAM Section - 3D Profile Cards ★★★ -->
+    <section id="team" class="team">
+        <!-- ★★★ Three.js Geometric Background ★★★ -->
+        <canvas id="team-canvas" class="team-canvas"></canvas>
+        <div class="team-bg">
+            <div class="team-particles"></div>
+            <div class="team-grid-lines"></div>
+        </div>
+        
+        <div class="section-header">
+            <span class="section-number">02.5</span>
+            <h2 class="section-title">OUR TEAM</h2>
+            <p class="section-subtitle">혁신을 만드는 사람들</p>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="team-container">
+            <div class="team-grid">
+                <!-- Team Member 1 - CEO -->
+                <div class="team-card" data-role="ceo">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d">
+                            <div class="card-front">
+                                <div class="member-glow"></div>
+                                <div class="member-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-ring ring-2"></div>
+                                    <div class="avatar-inner">
+                                        <span class="avatar-icon">👨‍💼</span>
+                                    </div>
+                                    <div class="avatar-particles">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h3 class="member-name">김진우</h3>
+                                    <span class="member-role">CEO & Founder</span>
+                                    <p class="member-bio">15년간 글로벌 디지털 에이전시를 이끌며 200+ 프로젝트 성공</p>
+                                </div>
+                                <div class="member-stats">
+                                    <div class="stat">
+                                        <span class="stat-num">200+</span>
+                                        <span class="stat-label">Projects</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-num">15</span>
+                                        <span class="stat-label">Years</span>
+                                    </div>
+                                </div>
+                                <div class="card-hint">HOVER FOR MORE</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="back-content">
+                                    <h4>전문 분야</h4>
+                                    <div class="skills-cloud">
+                                        <span class="skill">전략 기획</span>
+                                        <span class="skill">브랜드 빌딩</span>
+                                        <span class="skill">비즈니스 개발</span>
+                                        <span class="skill">팀 리더십</span>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="#" class="social-link">LinkedIn</a>
+                                        <a href="#" class="social-link">Twitter</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 - Creative Director -->
+                <div class="team-card" data-role="creative">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d">
+                            <div class="card-front">
+                                <div class="member-glow"></div>
+                                <div class="member-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-ring ring-2"></div>
+                                    <div class="avatar-inner">
+                                        <span class="avatar-icon">👩‍🎨</span>
+                                    </div>
+                                    <div class="avatar-particles">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h3 class="member-name">이서연</h3>
+                                    <span class="member-role">Creative Director</span>
+                                    <p class="member-bio">칸 라이언즈 수상 경력의 크리에이티브 디렉터</p>
+                                </div>
+                                <div class="member-stats">
+                                    <div class="stat">
+                                        <span class="stat-num">50+</span>
+                                        <span class="stat-label">Awards</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-num">12</span>
+                                        <span class="stat-label">Years</span>
+                                    </div>
+                                </div>
+                                <div class="card-hint">HOVER FOR MORE</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="back-content">
+                                    <h4>전문 분야</h4>
+                                    <div class="skills-cloud">
+                                        <span class="skill">브랜드 디자인</span>
+                                        <span class="skill">모션 그래픽</span>
+                                        <span class="skill">UX/UI</span>
+                                        <span class="skill">아트 디렉션</span>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="#" class="social-link">Behance</a>
+                                        <a href="#" class="social-link">Dribbble</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 - Tech Lead -->
+                <div class="team-card" data-role="tech">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d">
+                            <div class="card-front">
+                                <div class="member-glow"></div>
+                                <div class="member-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-ring ring-2"></div>
+                                    <div class="avatar-inner">
+                                        <span class="avatar-icon">👨‍💻</span>
+                                    </div>
+                                    <div class="avatar-particles">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h3 class="member-name">박민준</h3>
+                                    <span class="member-role">Tech Lead</span>
+                                    <p class="member-bio">Google 출신 풀스택 개발자, WebGL & Three.js 전문가</p>
+                                </div>
+                                <div class="member-stats">
+                                    <div class="stat">
+                                        <span class="stat-num">10K+</span>
+                                        <span class="stat-label">Commits</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-num">8</span>
+                                        <span class="stat-label">Years</span>
+                                    </div>
+                                </div>
+                                <div class="card-hint">HOVER FOR MORE</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="back-content">
+                                    <h4>전문 분야</h4>
+                                    <div class="skills-cloud">
+                                        <span class="skill">Three.js</span>
+                                        <span class="skill">WebGL</span>
+                                        <span class="skill">React</span>
+                                        <span class="skill">Node.js</span>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="#" class="social-link">GitHub</a>
+                                        <a href="#" class="social-link">LinkedIn</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 - Motion Designer -->
+                <div class="team-card" data-role="motion">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d">
+                            <div class="card-front">
+                                <div class="member-glow"></div>
+                                <div class="member-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-ring ring-2"></div>
+                                    <div class="avatar-inner">
+                                        <span class="avatar-icon">🎬</span>
+                                    </div>
+                                    <div class="avatar-particles">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h3 class="member-name">최유나</h3>
+                                    <span class="member-role">Motion Designer</span>
+                                    <p class="member-bio">Pixar 인턴 출신, 감성적인 모션으로 스토리를 전달</p>
+                                </div>
+                                <div class="member-stats">
+                                    <div class="stat">
+                                        <span class="stat-num">100+</span>
+                                        <span class="stat-label">Videos</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-num">6</span>
+                                        <span class="stat-label">Years</span>
+                                    </div>
+                                </div>
+                                <div class="card-hint">HOVER FOR MORE</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="back-content">
+                                    <h4>전문 분야</h4>
+                                    <div class="skills-cloud">
+                                        <span class="skill">After Effects</span>
+                                        <span class="skill">Cinema 4D</span>
+                                        <span class="skill">Blender</span>
+                                        <span class="skill">Lottie</span>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="#" class="social-link">Vimeo</a>
+                                        <a href="#" class="social-link">Instagram</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 - 3D Artist -->
+                <div class="team-card" data-role="3d">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d">
+                            <div class="card-front">
+                                <div class="member-glow"></div>
+                                <div class="member-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-ring ring-2"></div>
+                                    <div class="avatar-inner">
+                                        <span class="avatar-icon">🎮</span>
+                                    </div>
+                                    <div class="avatar-particles">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h3 class="member-name">정현우</h3>
+                                    <span class="member-role">3D Artist</span>
+                                    <p class="member-bio">게임 업계 출신, 포토리얼리스틱 3D 모델링 전문</p>
+                                </div>
+                                <div class="member-stats">
+                                    <div class="stat">
+                                        <span class="stat-num">500+</span>
+                                        <span class="stat-label">Models</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-num">7</span>
+                                        <span class="stat-label">Years</span>
+                                    </div>
+                                </div>
+                                <div class="card-hint">HOVER FOR MORE</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="back-content">
+                                    <h4>전문 분야</h4>
+                                    <div class="skills-cloud">
+                                        <span class="skill">Maya</span>
+                                        <span class="skill">ZBrush</span>
+                                        <span class="skill">Substance</span>
+                                        <span class="skill">Unreal</span>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="#" class="social-link">ArtStation</a>
+                                        <a href="#" class="social-link">Instagram</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 6 - UX Researcher -->
+                <div class="team-card" data-role="ux">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d">
+                            <div class="card-front">
+                                <div class="member-glow"></div>
+                                <div class="member-avatar">
+                                    <div class="avatar-ring"></div>
+                                    <div class="avatar-ring ring-2"></div>
+                                    <div class="avatar-inner">
+                                        <span class="avatar-icon">🔬</span>
+                                    </div>
+                                    <div class="avatar-particles">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h3 class="member-name">한소희</h3>
+                                    <span class="member-role">UX Researcher</span>
+                                    <p class="member-bio">삼성전자 UX팀 출신, 데이터 기반 사용자 경험 설계</p>
+                                </div>
+                                <div class="member-stats">
+                                    <div class="stat">
+                                        <span class="stat-num">1M+</span>
+                                        <span class="stat-label">Users</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-num">9</span>
+                                        <span class="stat-label">Years</span>
+                                    </div>
+                                </div>
+                                <div class="card-hint">HOVER FOR MORE</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="back-content">
+                                    <h4>전문 분야</h4>
+                                    <div class="skills-cloud">
+                                        <span class="skill">사용자 리서치</span>
+                                        <span class="skill">A/B 테스팅</span>
+                                        <span class="skill">데이터 분석</span>
+                                        <span class="skill">프로토타이핑</span>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="#" class="social-link">LinkedIn</a>
+                                        <a href="#" class="social-link">Medium</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-cta">
+            <span class="cta-text">우리 팀과 함께하고 싶으신가요?</span>
+            <a href="#contact" class="cta-button magnetic">
+                <span>JOIN US</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
     <!-- 03. SERVICES Section -->
     <section id="services" class="services">
         <canvas id="services-canvas"></canvas>
@@ -359,6 +702,181 @@
                 <span class="dot">◆</span>
                 <span>MOTION DESIGN</span>
                 <span class="dot">◆</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ★★★ VIDEO SHOWREEL Section - Torus Background + Timeline ★★★ -->
+    <section id="showreel" class="showreel showreel-v2">
+        <!-- ★★★ Three.js Torus Tornado Background ★★★ -->
+        <canvas id="showreel-canvas" class="showreel-canvas"></canvas>
+        
+        <div class="showreel-content-v2">
+            <!-- Header -->
+            <div class="showreel-header-v2">
+                <span class="showreel-label">SHOWREEL 2024</span>
+                <h2 class="showreel-title-v2">OUR JOURNEY</h2>
+            </div>
+
+            <!-- Main Layout: Small Video + Timeline -->
+            <div class="showreel-layout carousel-only">
+                <!-- 3D Panorama Video Carousel (Full Width) -->
+                <div class="video-carousel-3d">
+                    <div class="carousel-container">
+                        <div class="carousel-track" id="carouselTrack">
+                            <!-- Card 1 -->
+                            <div class="carousel-card" data-index="0">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">🎬</span>
+                                        <span class="creator-name">Brand Film</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 2 -->
+                            <div class="carousel-card" data-index="1">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">🌐</span>
+                                        <span class="creator-name">Web 3D</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 3 -->
+                            <div class="carousel-card" data-index="2">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">📱</span>
+                                        <span class="creator-name">App Design</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 4 -->
+                            <div class="carousel-card" data-index="3">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">🎮</span>
+                                        <span class="creator-name">Interactive</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 5 (Center) -->
+                            <div class="carousel-card active" data-index="4">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline autoplay>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">🎨</span>
+                                        <span class="creator-name">Motion Art</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 6 -->
+                            <div class="carousel-card" data-index="5">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">🏆</span>
+                                        <span class="creator-name">Award Film</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 7 -->
+                            <div class="carousel-card" data-index="6">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">🌍</span>
+                                        <span class="creator-name">Global Ad</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 8 -->
+                            <div class="carousel-card" data-index="7">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">🔮</span>
+                                        <span class="creator-name">VFX Reel</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 9 -->
+                            <div class="carousel-card" data-index="8">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">✨</span>
+                                        <span class="creator-name">Product</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 10 -->
+                            <div class="carousel-card" data-index="9">
+                                <div class="card-video-wrapper">
+                                    <video muted loop playsinline>
+                                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="card-overlay-info">
+                                        <span class="creator-avatar">🚀</span>
+                                        <span class="creator-name">Future</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Dots -->
+                    <div class="carousel-dots">
+                        <span class="dot" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                        <span class="dot" data-index="3"></span>
+                        <span class="dot active" data-index="4"></span>
+                        <span class="dot" data-index="5"></span>
+                        <span class="dot" data-index="6"></span>
+                        <span class="dot" data-index="7"></span>
+                        <span class="dot" data-index="8"></span>
+                        <span class="dot" data-index="9"></span>
+                    </div>
+                    
+                    <!-- Drag Hint -->
+                    <div class="drag-hint">DRAG TO EXPLORE</div>
+                    
+                    <!-- Navigation Arrows (mobile only) -->
+                    <button class="carousel-arrow prev" id="carouselPrev">❮</button>
+                    <button class="carousel-arrow next" id="carouselNext">❯</button>
+                </div>
             </div>
         </div>
     </section>
@@ -818,6 +1336,6 @@
         </div>
     </footer>
 
-    <script src="main.js?v=20260116"></script>
+    <script src="main.js?v=20260143"></script>
   </body>
 </html>
