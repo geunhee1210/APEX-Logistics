@@ -1,14 +1,823 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MailFlow Enterprise - 대기업 이메일 마케팅 솔루션</title>
-    <script type="module" crossorigin src="./assets/index-BO4cjG2q.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-C8qevvjE.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS CREATIVE | Digital Experience Agency</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <link rel="stylesheet" href="styles.css?v=20260114">
   </head>
   <body>
-    <div id="root"></div>
+    <!-- ★★★ GLOBAL SPIRIT CHARACTER - Moves across entire page ★★★ -->
+    <div id="hero-character" class="hero-character spirit global-character">
+        <div class="spirit-glow"></div>
+        <div class="spirit-body">
+            <div class="spirit-ear ear-left"></div>
+            <div class="spirit-ear ear-right"></div>
+            <div class="spirit-head">
+                <div class="spirit-eye eye-left">
+                    <div class="eye-shine"></div>
+                </div>
+                <div class="spirit-eye eye-right">
+                    <div class="eye-shine"></div>
+                </div>
+            </div>
+            <div class="spirit-tail">
+                <div class="tail-segment seg-1"></div>
+                <div class="tail-segment seg-2"></div>
+                <div class="tail-segment seg-3"></div>
+            </div>
+            <div class="spirit-particle p1"></div>
+            <div class="spirit-particle p2"></div>
+            <div class="spirit-particle p3"></div>
+        </div>
+        <div class="spirit-shadow"></div>
+    </div>
+    <div id="character-hint" class="character-hint global-hint">
+        <span>← ↑ ↓ → MOVE | SPACE BOOST</span>
+    </div>
+    
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-text">
+                <span class="loader-percent">0</span>%
+            </div>
+        </div>
+        <div class="loader-brand">NEXUS CREATIVE</div>
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-circle"></div>
+        <span class="cursor-text">EXPLORE</span>
+    </div>
+
+    <!-- Mouse Spotlight -->
+    <div class="spotlight"></div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <span class="logo-text glitch-hover" data-text="NEXUS">NEXUS</span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link magnetic" data-index="01">HOME</a>
+            <a href="#about" class="nav-link magnetic" data-index="02">ABOUT</a>
+            <div class="nav-dropdown">
+                <a href="#services" class="nav-link magnetic" data-index="03">SERVICES</a>
+                <div class="dropdown-menu">
+                    <a href="3d-web.html" class="dropdown-item">
+                        <span class="dropdown-num">01</span>
+                        <span class="dropdown-text">3D Web Experience</span>
+                        <span class="dropdown-arrow">→</span>
+                    </a>
+                    <a href="interactive.html" class="dropdown-item">
+                        <span class="dropdown-num">02</span>
+                        <span class="dropdown-text">Interactive Campaign</span>
+                        <span class="dropdown-arrow">→</span>
+                    </a>
+                    <a href="motion.html" class="dropdown-item">
+                        <span class="dropdown-num">03</span>
+                        <span class="dropdown-text">Motion & Animation</span>
+                        <span class="dropdown-arrow">→</span>
+                    </a>
+                    <a href="ar-vr.html" class="dropdown-item">
+                        <span class="dropdown-num">04</span>
+                        <span class="dropdown-text">AR / VR Experience</span>
+                        <span class="dropdown-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+            <a href="#works" class="nav-link magnetic" data-index="04">WORKS</a>
+            <a href="#process" class="nav-link magnetic" data-index="05">PROCESS</a>
+            <a href="#contact" class="nav-link magnetic" data-index="06">CONTACT</a>
+        </div>
+        <button class="nav-cta magnetic">
+            <span>GET IN TOUCH</span>
+        </button>
+        <div class="nav-menu-btn magnetic">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- 01. HERO Section -->
+    <section id="hero" class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-grid-overlay"></div>
+        
+        
+        <div class="hero-content">
+            <div class="hero-subtitle">
+                <span class="line"></span>
+                <span class="text typing-effect">DIGITAL EXPERIENCE AGENCY</span>
+                <span class="line"></span>
+            </div>
+            
+            <h1 class="hero-title">
+                <div class="title-line">
+                    <span class="word glitch" data-text="WE CREATE">WE CREATE</span>
+                </div>
+                <div class="title-line">
+                    <span class="word glitch" data-text="DIGITAL">DIGITAL</span>
+                </div>
+                <div class="title-line">
+                    <span class="word neon" data-text="MASTERPIECES">MASTERPIECES</span>
+                </div>
+            </h1>
+            
+            <p class="hero-description">
+                최첨단 3D 기술과 인터랙티브 경험으로<br>
+                브랜드의 디지털 혁신을 이끕니다
+            </p>
+            
+            <div class="hero-cta">
+                <button class="btn-primary magnetic" data-cursor="click">
+                    <span>EXPLORE WORKS</span>
+                    <svg viewBox="0 0 24 24" class="btn-arrow">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="btn-secondary magnetic" data-cursor="click">
+                    <span>WATCH REEL</span>
+                    <div class="play-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="5,3 19,12 5,21"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <span>SCROLL TO EXPLORE</span>
+            <div class="scroll-arrow">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number" data-target="150">0</span>+
+                <span class="stat-label">PROJECTS</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-target="50">0</span>+
+                <span class="stat-label">AWARDS</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-target="12">0</span>
+                <span class="stat-label">YEARS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02. ABOUT Section -->
+    <section id="about" class="about">
+        <!-- ★★★ PLEXUS NETWORK BACKGROUND ★★★ -->
+        <canvas id="about-plexus-canvas" class="about-plexus-canvas"></canvas>
+        <div class="about-bg">
+            <div class="grid-lines"></div>
+        </div>
+        
+        <div class="about-content">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">ABOUT US</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-left">
+                    <div class="about-intro">
+                        <p class="intro-text reveal-text">
+                            우리는 불가능을 가능하게 만드는<br>
+                            <span class="highlight">디지털 크리에이티브 에이전시</span>입니다.
+                        </p>
+                    </div>
+                    
+                    <div class="skills-container">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">3D / WebGL</span>
+                                <span class="skill-percent">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Interactive Animation</span>
+                                <span class="skill-percent">98%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="98"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Creative Development</span>
+                                <span class="skill-percent">92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="92"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-right">
+                    <div class="visual-frame" data-cursor="view">
+                        <div class="frame-corner top-left"></div>
+                        <div class="frame-corner top-right"></div>
+                        <div class="frame-corner bottom-left"></div>
+                        <div class="frame-corner bottom-right"></div>
+                        <div class="visual-content">
+                            <canvas id="about-canvas"></canvas>
+                            <div class="visual-text">
+                                <span class="v-number" data-target="12">0</span>
+                                <span class="v-label">YEARS OF<br>INNOVATION</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-tagline">
+                <p class="tagline-text glitch-typing">
+                    우리는 기술과 창의성의 경계를 넘어<br>
+                    디지털 세계에 새로운 차원을 만듭니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03. SERVICES Section -->
+    <section id="services" class="services">
+        <canvas id="services-canvas"></canvas>
+        <div class="services-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title">OUR SERVICES</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <!-- ★★★ THREE.JS 3D SERVICE CUBES ★★★ -->
+        <div class="services-grid four-col">
+            <div class="service-cube-container" data-service="3d-web" data-color="#00f5ff" data-link="3d-web.html">
+                <canvas class="service-cube-canvas"></canvas>
+                <div class="cube-overlay">
+                    <span class="cube-hint">🎲 DRAG TO ROTATE</span>
+                </div>
+            </div>
+
+            <div class="service-cube-container" data-service="interactive" data-color="#ff00ff" data-link="interactive.html">
+                <canvas class="service-cube-canvas"></canvas>
+                <div class="cube-overlay">
+                    <span class="cube-hint">🎲 DRAG TO ROTATE</span>
+                </div>
+            </div>
+
+            <div class="service-cube-container" data-service="motion" data-color="#ffff00" data-link="motion.html">
+                <canvas class="service-cube-canvas"></canvas>
+                <div class="cube-overlay">
+                    <span class="cube-hint">🎲 DRAG TO ROTATE</span>
+                </div>
+            </div>
+
+            <div class="service-cube-container" data-service="ar-vr" data-color="#00ff88" data-link="ar-vr.html">
+                <canvas class="service-cube-canvas"></canvas>
+                <div class="cube-overlay">
+                    <span class="cube-hint">🎲 DRAG TO ROTATE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <section class="marquee-section">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>THREE.JS</span>
+                <span class="dot">◆</span>
+                <span>WEBGL</span>
+                <span class="dot">◆</span>
+                <span>GSAP</span>
+                <span class="dot">◆</span>
+                <span>CREATIVE DEVELOPMENT</span>
+                <span class="dot">◆</span>
+                <span>INTERACTIVE</span>
+                <span class="dot">◆</span>
+                <span>3D EXPERIENCE</span>
+                <span class="dot">◆</span>
+                <span>MOTION DESIGN</span>
+                <span class="dot">◆</span>
+            </div>
+            <div class="marquee-content">
+                <span>THREE.JS</span>
+                <span class="dot">◆</span>
+                <span>WEBGL</span>
+                <span class="dot">◆</span>
+                <span>GSAP</span>
+                <span class="dot">◆</span>
+                <span>CREATIVE DEVELOPMENT</span>
+                <span class="dot">◆</span>
+                <span>INTERACTIVE</span>
+                <span class="dot">◆</span>
+                <span>3D EXPERIENCE</span>
+                <span class="dot">◆</span>
+                <span>MOTION DESIGN</span>
+                <span class="dot">◆</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. WORKS Section -->
+    <section id="works" class="works">
+        <!-- ★★★ FLOATING GEOMETRIC SHAPES BACKGROUND ★★★ -->
+        <canvas id="works-geometric-canvas" class="works-geometric-canvas"></canvas>
+        <div class="works-header">
+            <span class="section-number">03</span>
+            <h2 class="section-title">SELECTED WORKS</h2>
+            <p class="works-subtitle">최고의 프로젝트들을 만나보세요</p>
+        </div>
+
+        <div class="works-gallery-wrapper">
+            <div class="works-gallery">
+                <article class="work-item" data-category="E-Commerce" data-cursor="view">
+                    <div class="work-image">
+                        <div class="work-img-inner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <span class="work-number">01</span>
+                            <div class="work-preview">
+                                <span class="preview-text">PREVIEW</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <span class="work-category">E-Commerce • 3D</span>
+                        <h3 class="work-title">LUXURY WATCH</h3>
+                        <p class="work-desc">프리미엄 시계 브랜드 3D 이커머스 플랫폼</p>
+                        <div class="work-tags">
+                            <span>#3D</span>
+                            <span>#WebGL</span>
+                            <span>#eCommerce</span>
+                        </div>
+                        <a href="#" class="work-link magnetic">
+                            <span>VIEW CASE STUDY</span>
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="work-item" data-category="Interactive" data-cursor="view">
+                    <div class="work-image">
+                        <div class="work-img-inner" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <span class="work-number">02</span>
+                            <div class="work-preview">
+                                <span class="preview-text">PREVIEW</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <span class="work-category">Automotive • Interactive</span>
+                        <h3 class="work-title">HYUNDAI IONIQ</h3>
+                        <p class="work-desc">아이오닉 6 인터랙티브 쇼룸 WebGL 경험</p>
+                        <div class="work-tags">
+                            <span>#WebGL</span>
+                            <span>#Interactive</span>
+                            <span>#3D</span>
+                        </div>
+                        <a href="#" class="work-link magnetic">
+                            <span>VIEW CASE STUDY</span>
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="work-item" data-category="Game" data-cursor="view">
+                    <div class="work-image">
+                        <div class="work-img-inner" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <span class="work-number">03</span>
+                            <div class="work-preview">
+                                <span class="preview-text">PREVIEW</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <span class="work-category">Game • Entertainment</span>
+                        <h3 class="work-title">NEXON UNIVERSE</h3>
+                        <p class="work-desc">메이플스토리 20주년 기념 인터랙티브 월드</p>
+                        <div class="work-tags">
+                            <span>#Game</span>
+                            <span>#3D</span>
+                            <span>#Interactive</span>
+                        </div>
+                        <a href="#" class="work-link magnetic">
+                            <span>VIEW CASE STUDY</span>
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="work-item" data-category="Fashion" data-cursor="view">
+                    <div class="work-image">
+                        <div class="work-img-inner" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <span class="work-number">04</span>
+                            <div class="work-preview">
+                                <span class="preview-text">PREVIEW</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <span class="work-category">Fashion • AR</span>
+                        <h3 class="work-title">GENTLE MONSTER</h3>
+                        <p class="work-desc">버추얼 플래그십 스토어 AR 착용 경험</p>
+                        <div class="work-tags">
+                            <span>#AR</span>
+                            <span>#Fashion</span>
+                            <span>#Virtual</span>
+                        </div>
+                        <a href="#" class="work-link magnetic">
+                            <span>VIEW CASE STUDY</span>
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="work-item" data-category="Entertainment" data-cursor="view">
+                    <div class="work-image">
+                        <div class="work-img-inner" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <span class="work-number">05</span>
+                            <div class="work-preview">
+                                <span class="preview-text">PREVIEW</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <span class="work-category">Entertainment • K-Pop</span>
+                        <h3 class="work-title">HYBE ARTISTS</h3>
+                        <p class="work-desc">BTS 월드투어 디지털 익스피리언스 플랫폼</p>
+                        <div class="work-tags">
+                            <span>#Entertainment</span>
+                            <span>#Interactive</span>
+                            <span>#Live</span>
+                        </div>
+                        <a href="#" class="work-link magnetic">
+                            <span>VIEW CASE STUDY</span>
+                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="works-nav">
+            <button class="works-nav-btn prev magnetic">
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <div class="works-counter">
+                <span class="current">01</span>
+                <span class="divider">/</span>
+                <span class="total">05</span>
+            </div>
+            <button class="works-nav-btn next magnetic">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- 05. PROCESS Section -->
+    <section id="process" class="process">
+        <div class="section-header">
+            <span class="section-number">04</span>
+            <h2 class="section-title">OUR PROCESS</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="process-timeline">
+            <div class="timeline-line">
+                <div class="timeline-progress"></div>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step" data-step="1">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="50" cy="50" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <line x1="65" y1="65" x2="85" y2="85" stroke="currentColor" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">DISCOVER</h3>
+                    <p class="step-duration">1-2주</p>
+                    <ul class="step-list">
+                        <li>요구사항 분석</li>
+                        <li>경쟁사 리서치</li>
+                        <li>전략 수립</li>
+                    </ul>
+                </div>
+
+                <div class="process-step" data-step="2">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 100 100">
+                            <path d="M30 70 L50 20 L55 35 L70 30" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="70" cy="30" r="5" fill="currentColor"/>
+                            <path d="M25 80 L75 80" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">DESIGN</h3>
+                    <p class="step-duration">2-3주</p>
+                    <ul class="step-list">
+                        <li>와이어프레임</li>
+                        <li>디자인 시안</li>
+                        <li>프로토타입</li>
+                    </ul>
+                </div>
+
+                <div class="process-step" data-step="3">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 100 100">
+                            <rect x="20" y="20" width="60" height="60" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <text x="50" y="55" text-anchor="middle" fill="currentColor" font-size="20">&lt;/&gt;</text>
+                        </svg>
+                    </div>
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">DEVELOP</h3>
+                    <p class="step-duration">4-6주</p>
+                    <ul class="step-list">
+                        <li>프론트엔드</li>
+                        <li>백엔드</li>
+                        <li>QA 테스트</li>
+                    </ul>
+                </div>
+
+                <div class="process-step" data-step="4">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 100 100">
+                            <path d="M50 80 L50 30 L30 50 M50 30 L70 50" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <ellipse cx="50" cy="85" rx="20" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M35 25 Q50 10 65 25" fill="none" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="step-number">04</div>
+                    <h3 class="step-title">DELIVER</h3>
+                    <p class="step-duration">지속</p>
+                    <ul class="step-list">
+                        <li>배포</li>
+                        <li>교육</li>
+                        <li>모니터링</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06. TESTIMONIALS Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="section-header">
+            <span class="section-number">05</span>
+            <h2 class="section-title">CLIENT STORIES</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="testimonials-carousel">
+            <div class="testimonial-track">
+                <div class="testimonial-card active" data-cursor="drag">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text">
+                            NEXUS와의 협업은 우리 브랜드의 디지털 역사를 다시 썼습니다. 
+                            단순한 웹사이트가 아닌, 하나의 예술 작품을 만들었습니다.
+                        </p>
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"><span>SK</span></div>
+                            <div class="author-info">
+                                <span class="author-name">김성현 CEO</span>
+                                <span class="author-role">삼성전자 Digital Marketing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-cursor="drag">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text">
+                            3D 웹 경험이 이렇게 가능한지 몰랐습니다. 
+                            경쟁사와의 차별점을 확실히 만들어 주었습니다.
+                        </p>
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"><span>HM</span></div>
+                            <div class="author-info">
+                                <span class="author-name">박지원 Director</span>
+                                <span class="author-role">현대자동차 Brand Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-cursor="drag">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text">
+                            글로벌 팬들이 열광하는 플랫폼을 만들어주셨습니다.
+                            기술력과 창의성 모두 최고 수준입니다.
+                        </p>
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"><span>HB</span></div>
+                            <div class="author-info">
+                                <span class="author-name">이준호 PD</span>
+                                <span class="author-role">HYBE Digital Platform</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonials-nav">
+                <button class="test-nav-btn prev magnetic">
+                    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                </button>
+                <div class="testimonials-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="test-nav-btn next magnetic">
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 07. CONTACT Section -->
+    <section id="contact" class="contact">
+        <div class="contact-bg">
+            <canvas id="contact-canvas"></canvas>
+        </div>
+
+        <div class="contact-content">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title">LET'S CREATE</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 class="contact-heading">
+                        프로젝트가 있으신가요?<br>
+                        <span class="neon">함께 만들어요.</span>
+                    </h3>
+                    <p class="contact-desc">
+                        불가능해 보이는 아이디어도 환영합니다.<br>
+                        당신의 비전을 현실로 만들어 드립니다.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-label">EMAIL</span>
+                            <a href="mailto:hello@nexus.studio" class="contact-value magnetic">hello@nexus.studio</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">PHONE</span>
+                            <a href="tel:+821012345678" class="contact-value magnetic">+82 10 1234 5678</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">LOCATION</span>
+                            <span class="contact-value">Seoul, South Korea</span>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link magnetic" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1.5"/></svg>
+                        </a>
+                        <a href="#" class="social-link magnetic" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                        </a>
+                        <a href="#" class="social-link magnetic" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#" class="social-link magnetic" aria-label="Dribbble">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required autocomplete="off">
+                        <label for="name">YOUR NAME</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required autocomplete="off">
+                        <label for="email">YOUR EMAIL</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <select id="budget" name="budget" required>
+                            <option value="" disabled selected></option>
+                            <option value="under50">Under $50K</option>
+                            <option value="50-100">$50K - $100K</option>
+                            <option value="100-200">$100K - $200K</option>
+                            <option value="over200">Over $200K</option>
+                        </select>
+                        <label for="budget">PROJECT BUDGET</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                        <label for="message">YOUR MESSAGE</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <button type="submit" class="btn-submit magnetic" data-cursor="click">
+                        <span class="btn-text">SEND MESSAGE</span>
+                        <span class="btn-loading">SENDING...</span>
+                        <span class="btn-success">SENT! ✓</span>
+                        <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-logo glitch-hover" data-text="NEXUS">NEXUS</span>
+                <p class="footer-tagline">Creating impossible digital dreams</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link magnetic">Privacy Policy</a>
+                <a href="#" class="footer-link magnetic">Terms of Service</a>
+            </div>
+            <div class="footer-copyright">
+                <span>© 2024 NEXUS CREATIVE. All rights reserved.</span>
+            </div>
+        </div>
+        <div class="footer-decoration">
+            <div class="footer-line"></div>
+        </div>
+    </footer>
+
+    <script src="main.js?v=20260116"></script>
   </body>
 </html>
